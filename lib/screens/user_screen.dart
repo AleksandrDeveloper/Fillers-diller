@@ -5,6 +5,20 @@ class UserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+=======
+    return Scaffold(
+      body: UserScreenWidget(),
+    );
+  }
+}
+
+class UserScreenWidget extends StatelessWidget {
+  const UserScreenWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+>>>>>>> user-profile
     return Container();
   }
 }
