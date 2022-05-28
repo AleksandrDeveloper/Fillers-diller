@@ -23,5 +23,3 @@ class SplashscreenBloc extends Bloc<SplashscreenEvent, SplashscreenState> {
     });
   }
 }
-
- 

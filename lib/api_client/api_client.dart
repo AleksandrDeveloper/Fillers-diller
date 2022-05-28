@@ -18,6 +18,7 @@ class ApiClient {
       final requestJson =
           await jsonDecode(response.body) as Map<String, dynamic>;
       final user = User.fromJson(requestJson);
+      print('Это имя пользователя полученого из apiClient ${user.firstName}');
       return user;
     } else {
       throw Error();

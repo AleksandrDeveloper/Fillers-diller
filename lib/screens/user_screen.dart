@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/user/user_bloc.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -6,7 +9,8 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UserScreenWidget(),
+      appBar: AppBar(title: const Text('UserScreen')),
+      body: const UserScreenWidget(),
     );
   }
 }
@@ -16,6 +20,25 @@ class UserScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        if (state is UserLoading) {
+          return const Center(
+            child: CircularProgressIndicator(color: Colors.red),
+          );
+        }
+        if (state is UserLoaded) {
+          return Column(
+            children: [Text(state.user.firstName)],
+          );
+        }
+        if (state is UserError) {
+          return Center(
+            child: Text(state.errorMessag),
+          );
+        }
+        return Container();
+      },
+    );
   }
 }

@@ -47,6 +47,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
           if (isAuth = true) {
             final userId = await client.authId(userEmail: userEmail);
+            var userIdBox = await Hive.openBox<int>('userIdBox');
+            await userIdBox.put('userIdKey', userId);
+            final userIdMain = userIdBox.get('userIdKey') as int;
+            print('это user id из hive $userIdMain');
+            userIdBox.close();
 
             var box = await Hive.openBox<bool>('isAuth');
             await box.delete('isAuthKey');

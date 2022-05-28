@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/user/user_bloc.dart';
 import '../storage/is_autf_pref.dart';
-import '../modal/my_app_modal.dart';
 
 class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
   BottomBarWidget({
@@ -43,8 +44,7 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
               ),
             ),
             IconButton(
-              onPressed: () async {
-                await pref.deleteAuth();
+              onPressed: () {
                 Navigator.of(context)
                     .pushNamed('home_screen/product_screen/wishlist_screen');
               },
@@ -54,9 +54,9 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
               ),
             ),
             IconButton(
-              onPressed: () async {
-                await pref.deleteAuth();
-                Navigator.of(context).pushNamed('splash');
+              onPressed: () {
+                BlocProvider.of<UserBloc>(context)
+                    .add(AddUser(context: context));
               },
               icon: const Icon(
                 Icons.person,
