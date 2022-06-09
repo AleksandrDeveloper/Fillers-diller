@@ -124,33 +124,6 @@ class OrderWidget extends StatelessWidget {
                         cardProduct: cardProduct));
                   },
                   child: const Text('Отправить заказ Bloc')),
-              ElevatedButton(
-                onPressed: () async {
-                  final firstName = firstNameController.text;
-                  final lastName = lastNameController.text;
-                  final email = emailController.text;
-                  final phone = phoneController.text;
-                  final country = countryController.text;
-                  final city = cityController.text;
-                  final adres = adresController.text;
-                  List<OrderProduct> orderProduct = [];
-                  orderProduct.add(OrderProduct(
-                      productId: cardProduct.first.productId,
-                      quantity: cardProduct.first.quantity));
-                  final createOrderBool = await client.createOrder(
-                      firstName: firstName,
-                      lastName: lastName,
-                      orderProduct: orderProduct,
-                      adres: adres,
-                      city: city,
-                      postCode: '140033',
-                      country: country,
-                      email: email,
-                      phone: phone);
-                  print(createOrderBool);
-                },
-                child: const Text('Отправить заказ Modal'),
-              ),
             ],
           ),
         )
