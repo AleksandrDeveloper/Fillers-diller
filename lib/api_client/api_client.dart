@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../modal/modals.dart';
+import '../modal/order_product.dart';
 import '../modal/user_modal.dart';
 
 class ApiClient {
@@ -22,6 +23,64 @@ class ApiClient {
       return user;
     } else {
       throw Error();
+    }
+  }
+
+  Future<bool> createOrder({
+    required String firstName,
+    required String lastName,
+    required List<OrderProduct> orderProduct,
+    required String adres,
+    required String city,
+    required int postCode,
+    required String country,
+    required String email,
+    required String phone,
+  }) async {
+    final url =
+        'https://fillers-diller.ru/wp-json/wc/v3/orders/?consumer_key=ck_2ab5c89962ef98cc8c241b67e9c29cac9d6d1fe2&consumer_secret=cs_c7f75335487d5b6c2d9e53a388781e8bcc725b37';
+    var body = {
+      "payment_method": "bacs",
+      "payment_method_title": "Direct Bank Transfer",
+      "set_paid": true,
+      "billing": {
+        "first_name": firstName,
+        "last_name": lastName,
+        "address_1": adres,
+        "address_2": "",
+        "city": city,
+        "state": city,
+        "postcode": postCode,
+        "country": country,
+        "email": email,
+        "phone": phone
+      },
+      "shipping": {
+        "first_name": firstName,
+        "last_name": lastName,
+        "address_1": adres,
+        "address_2": "",
+        "city": city,
+        "state": city,
+        "postcode": postCode,
+        "country": country
+      },
+      "line_items": orderProduct,
+      "shipping_lines": [
+        {
+          "method_id": "flat_rate",
+          "method_title": "Flat Rate",
+          "total": "10.00"
+        }
+      ]
+    };
+    final request = await client.post(Uri.parse(url),
+        headers: <String, String>{"Content-Type": "application/json"},
+        body: jsonEncode(body));
+    if (request.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 

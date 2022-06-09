@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:testfff/modal/order_product.dart';
+import '../api_client/api_client.dart';
 import '../blocs/details_product/details_product_bloc.dart';
 import '../blocs/product_card/product_card_bloc.dart';
-import '../blocs/wishlist/wishlist_bloc.dart';
-import '../widgets/product_card_max.dart';
 import '../widgets/sliver_app_bar.dart';
 
 class ProductCardScreen extends StatelessWidget {
@@ -23,21 +22,8 @@ class ProductCardScreen extends StatelessWidget {
             builder: (context, state) {
               if (state is DetailsProductLoaded) {
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        BlocProvider.of<WishlistBloc>(context)
-                            .add(AddProductWishlist(
-                          context: context,
-                          product: state.detailsProducts,
-                        ));
-                      },
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
@@ -50,7 +36,7 @@ class ProductCardScreen extends StatelessWidget {
                               color: Colors.white),
                           child: const Align(
                               alignment: Alignment.center,
-                              child: Text('Добавить в корзину')),
+                              child: Text('Сделать заказ')),
                         ),
                       ),
                     )
@@ -75,6 +61,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modal = ApiClient();
     return BlocBuilder<ProductCardBloc, ProductCardState>(
       builder: (context, state) {
         if (state is ProductCardLoading) {
@@ -90,33 +77,34 @@ class ProductCardWidget extends StatelessWidget {
               SizedBox(
                 height: 400,
                 child: ListView.builder(
-                    itemCount: state.productCardBloc.length,
-                    itemBuilder: (context, index) {
-                      return ProductCardMax(
-                        index: index,
-                        product: state.productCardBloc[index],
-                        widget: IconButton(
-                          onPressed: () {
-                            BlocProvider.of<ProductCardBloc>(context).add(
-                              DeleteProductToCard(
-                                  product: state.productCardBloc[index]),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.remove,
-                            color: Colors.red,
-                          ),
+                  itemCount: state.productCardBloc.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(state.productCardBloc[index].name),
+                                Text('${state.productCardBloc[index].quantity}')
+                              ],
+                            )
+                          ],
                         ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Подытог'),
-                  Text('${state.subtotal}'),
-                ],
-              )
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                        'home_screen/card_screen/order',
+                        arguments: state.productCardBloc);
+                  },
+                  child: const Text('Оформить заказ'))
             ],
           );
         }

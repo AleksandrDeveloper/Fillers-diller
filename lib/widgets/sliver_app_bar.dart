@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class SliverAppBer extends StatelessWidget {
   final Widget widget;
   final Widget NavBar;
-
   final Widget title;
   const SliverAppBer({
     Key? key,

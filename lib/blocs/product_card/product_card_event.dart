@@ -9,7 +9,10 @@ abstract class ProductCardEvent extends Equatable {
 
 class AddProductToCard extends ProductCardEvent {
   final Product product;
-  AddProductToCard({required this.product});
+
+  const AddProductToCard({
+    required this.product,
+  });
 
   @override
   List<Object> get props => [product];
@@ -17,7 +20,7 @@ class AddProductToCard extends ProductCardEvent {
 
 class DeleteProductToCard extends ProductCardEvent {
   final Product product;
-  DeleteProductToCard({required this.product});
+  const DeleteProductToCard({required this.product});
 
   @override
   List<Object> get props => [product];

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../api_client/api_client.dart';
-import '../../modal/product_card_order.dart';
+
 import '../../modal/product_modal.dart';
 
 part 'all_product_event.dart';

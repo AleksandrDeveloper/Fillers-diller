@@ -4,19 +4,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:testfff/blocs/search_product/search_product_bloc.dart';
 import 'package:testfff/blocs/category_product/category_product_bloc.dart';
 import 'package:testfff/routes/app_routes.dart';
-import 'package:testfff/screens/category_screen.dart';
-import 'package:testfff/screens/product_card_screen.dart';
-import 'package:testfff/screens/search_product.dart';
-import 'package:testfff/screens/user_screen.dart';
-import 'package:testfff/screens/wishlist_screen.dart';
 import 'blocs/all_category/all_category_bloc.dart';
 import 'blocs/all_product/all_product_bloc.dart';
 import 'blocs/details_product/details_product_bloc.dart';
+import 'blocs/order/order_bloc.dart';
+import 'blocs/product_card/product_card_bloc.dart';
 import 'blocs/splashScreen/splashscreen_bloc.dart';
 import 'blocs/user/user_bloc.dart';
 import 'blocs/wishlist/wishlist_bloc.dart';
-import 'screens/product_screen.dart';
-import 'screens/sreens.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -29,6 +24,8 @@ void main() async {
     BlocProvider<WishlistBloc>(create: (context) => WishlistBloc()),
     BlocProvider<UserBloc>(create: (context) => UserBloc()),
     BlocProvider<SplashscreenBloc>(create: (context) => SplashscreenBloc()),
+    BlocProvider<ProductCardBloc>(create: (context) => ProductCardBloc()),
+    BlocProvider<OrderBloc>(create: (context) => OrderBloc()),
     BlocProvider<CategoryProductBloc>(
         create: (context) => CategoryProductBloc()),
   ], child: const MyApp()));

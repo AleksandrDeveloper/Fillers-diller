@@ -37,7 +37,7 @@ class ProductScreen extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         BlocProvider.of<ProductCardBloc>(context).add(
-                          DeleteProductToCard(product: state.detailsProducts),
+                          AddProductToCard(product: state.detailsProducts),
                         );
                       },
                       child: Container(

@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
+import '../modal/card_product.dart';
 import '../screens/auth_screen.dart';
 import '../screens/category_screen.dart';
 import '../screens/home_screen.dart';
+import '../screens/order_screen.dart';
 import '../screens/product_card_screen.dart';
 import '../screens/product_screen.dart';
 import '../screens/search_product.dart';
@@ -32,8 +34,15 @@ class AppRoutes {
     'home_screen/card_screen': (context) {
       return const ProductCardScreen();
     },
+    'home_screen/card_screen/order': (context) {
+      final cartProductT =
+          ModalRoute.of(context)!.settings.arguments as List<CardProduct>;
+
+      return OrderScreen(cardProduct: cartProductT);
+    },
     'home_screen/product_screen/wishlist_screen': ((context) {
       return const WishlistScreen();
     }),
   };
+  final String initialRoutes = 'splash';
 }

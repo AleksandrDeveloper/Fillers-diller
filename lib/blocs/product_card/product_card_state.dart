@@ -13,11 +13,11 @@ class ProductCardLoading extends ProductCardState {
 }
 
 class ProductCardLoaded extends ProductCardState {
-  List<Product> productCardBloc;
-  String subtotal;
-  ProductCardLoaded({required this.productCardBloc, required this.subtotal});
+  List<CardProduct> productCardBloc;
+
+  ProductCardLoaded({required this.productCardBloc});
   @override
-  List<Object> get props => [productCardBloc, subtotal];
+  List<Object> get props => [productCardBloc];
 }
 
 class ProductCardError extends ProductCardState {
