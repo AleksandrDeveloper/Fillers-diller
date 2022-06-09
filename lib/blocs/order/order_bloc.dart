@@ -10,13 +10,13 @@ part 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   final client = ApiClient();
-  OrderBloc() : super(OrderInitial()) {
+  OrderBloc() : super(OrderLoading()) {
     List<OrderProduct> orderProduct = [];
     on<CreateOrder>((event, emit) async {
       orderProduct.add(OrderProduct(
           productId: event.cardProduct.first.productId,
           quantity: event.cardProduct.first.quantity));
-      await client.createOrder(
+      final createOrder = await client.createOrder(
         firstName: event.firstName,
         lastName: event.lastName,
         orderProduct: orderProduct,
@@ -28,7 +28,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         phone: event.phone,
       );
       print('object');
-      emit(OrderInitial());
+      emit(OrderGood(createOrder: createOrder));
     });
   }
 }

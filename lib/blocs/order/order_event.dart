@@ -13,7 +13,7 @@ class CreateOrder extends OrderEvent {
   List<CardProduct> cardProduct;
   String adres;
   String city;
-  int postCode;
+  String postCode;
   String country;
   String email;
   String phone;

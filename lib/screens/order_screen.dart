@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testfff/api_client/api_client.dart';
 import '../blocs/order/order_bloc.dart';
 import '../modal/card_product.dart';
+import '../modal/order_product.dart';
 import '../widgets/title_widget.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -119,10 +120,37 @@ class OrderWidget extends StatelessWidget {
                         phone: phone,
                         country: country,
                         city: city,
-                        postCode: 140033,
+                        postCode: '140033',
                         cardProduct: cardProduct));
                   },
-                  child: const Text('Отправить заказ'))
+                  child: const Text('Отправить заказ Bloc')),
+              ElevatedButton(
+                onPressed: () async {
+                  final firstName = firstNameController.text;
+                  final lastName = lastNameController.text;
+                  final email = emailController.text;
+                  final phone = phoneController.text;
+                  final country = countryController.text;
+                  final city = cityController.text;
+                  final adres = adresController.text;
+                  List<OrderProduct> orderProduct = [];
+                  orderProduct.add(OrderProduct(
+                      productId: cardProduct.first.productId,
+                      quantity: cardProduct.first.quantity));
+                  final createOrderBool = await client.createOrder(
+                      firstName: firstName,
+                      lastName: lastName,
+                      orderProduct: orderProduct,
+                      adres: adres,
+                      city: city,
+                      postCode: '140033',
+                      country: country,
+                      email: email,
+                      phone: phone);
+                  print(createOrderBool);
+                },
+                child: const Text('Отправить заказ Modal'),
+              ),
             ],
           ),
         )

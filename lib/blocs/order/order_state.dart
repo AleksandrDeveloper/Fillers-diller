@@ -7,7 +7,14 @@ abstract class OrderState extends Equatable {
   List<Object> get props => [];
 }
 
-class OrderInitial extends OrderState {
+class OrderLoading extends OrderState {
   @override
   List<Object> get props => [];
+}
+
+class OrderGood extends OrderState {
+  final bool createOrder;
+  const OrderGood({required this.createOrder});
+  @override
+  List<Object> get props => [createOrder];
 }

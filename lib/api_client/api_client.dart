@@ -32,7 +32,7 @@ class ApiClient {
     required List<OrderProduct> orderProduct,
     required String adres,
     required String city,
-    required int postCode,
+    required String postCode,
     required String country,
     required String email,
     required String phone,
@@ -74,12 +74,18 @@ class ApiClient {
         }
       ]
     };
-    final request = await client.post(Uri.parse(url),
-        headers: <String, String>{"Content-Type": "application/json"},
-        body: jsonEncode(body));
+    var head = {"Content-Type": "application/json"};
+    final request = await client.post(
+      Uri.parse(url),
+      headers: head,
+      body: jsonEncode(body),
+    );
     if (request.statusCode == 200) {
+      print('получилось');
       return true;
     } else {
+      print('не получилось');
+      print(jsonEncode(body));
       return false;
     }
   }

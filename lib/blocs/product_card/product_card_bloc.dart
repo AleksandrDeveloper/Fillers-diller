@@ -14,6 +14,14 @@ class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
           CardProduct cardProduct;
           List<CardProduct> productCard = [];
 
+          // productCard
+          //     .map((CardProduct cardProduct) => CardProduct(
+          //         name: event.product.name,
+          //         productId: event.product.id,
+          //         quantity: 1,
+          //         price: event.product.salePrice,
+          //         regularPrice: event.product.regularPrice))
+          //     .toList();
           cardProduct = CardProduct(
               productId: event.product.id,
               quantity: 1,
