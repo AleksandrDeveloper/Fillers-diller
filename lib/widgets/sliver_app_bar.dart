@@ -24,7 +24,7 @@ class SliverAppBer extends StatelessWidget {
               title: title,
               centerTitle: true,
               background: Image.network(
-                'https://uprostim.com/wp-content/uploads/2021/04/image071-44.jpg',
+                'https://fillers-diller.ru/wp-content/uploads/2022/05/Дизайн-без-названия-4.png',
                 fit: BoxFit.cover,
               ),
             ),

@@ -20,7 +20,9 @@ class AddProductToCard extends ProductCardEvent {
 
 class DeleteProductToCard extends ProductCardEvent {
   final Product product;
-  const DeleteProductToCard({required this.product});
+  const DeleteProductToCard({
+    required this.product,
+  });
 
   @override
   List<Object> get props => [product];

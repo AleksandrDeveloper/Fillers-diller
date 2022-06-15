@@ -7,10 +7,12 @@ import '../modal/product_modal.dart';
 class ProductCardMax extends StatelessWidget {
   final int index;
   final Widget widget;
+  final Widget widgetTwo;
   final Product product;
   const ProductCardMax(
       {Key? key,
       required this.index,
+      required this.widgetTwo,
       required this.product,
       required this.widget})
       : super(key: key);
@@ -27,7 +29,7 @@ class ProductCardMax extends StatelessWidget {
             Positioned(
               top: 30,
               child: Container(
-                width: 370,
+                width: MediaQuery.of(context).size.width - 20,
                 height: 136,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
@@ -61,7 +63,19 @@ class ProductCardMax extends StatelessWidget {
                           ),
                         ],
                       ),
-                      widget,
+                      Text(
+                        '${product.prise} р',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 150),
+                        child: Row(
+                          children: [
+                            widgetTwo,
+                            widget,
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),

@@ -2,10 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:testfff/api_client/api_client.dart';
-
-import '../../modal/card_product.dart';
 import '../../modal/order_product.dart';
-
+import '../../modal/product_modal.dart';
 part 'order_event.dart';
 part 'order_state.dart';
 
@@ -15,8 +13,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     List<OrderProduct> orderProduct = [];
     on<CreateOrder>((event, emit) async {
       orderProduct.add(OrderProduct(
-          productId: event.cardProduct.first.productId,
-          quantity: event.cardProduct.first.quantity));
+          productId: event.cardProduct.first.id,
+          quantity: event.cardProduct.first.id)); //заменить за количество//
       var userIdBox = await Hive.openBox<int>('userIdBox');
       final userId = userIdBox.get('userIdKey') as int;
       userIdBox.close();

@@ -26,6 +26,8 @@ class Product extends Equatable {
     this.shortDescription,
   );
 
+  int get prise => int.parse(regularPrice);
+
   Product.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         onSale = json['on_sale'],

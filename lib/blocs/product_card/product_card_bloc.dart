@@ -1,44 +1,25 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../modal/card_product.dart';
+import '../../modal/product_card.dart';
 import '../../modal/product_modal.dart';
 part 'product_card_event.dart';
 part 'product_card_state.dart';
 
 class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
   ProductCardBloc() : super(ProductCardLoading()) {
+    List<ProductCard> productCard;
+
+    ProductCard product;
     on<AddProductToCard>(
       (event, emit) {
         emit(ProductCardLoading());
         try {
-          CardProduct cardProduct;
-          List<CardProduct> productCard = [];
-
-          // productCard
-          //     .map((CardProduct cardProduct) => CardProduct(
-          //         name: event.product.name,
-          //         productId: event.product.id,
-          //         quantity: 1,
-          //         price: event.product.salePrice,
-          //         regularPrice: event.product.regularPrice))
-          //     .toList();
-          cardProduct = CardProduct(
-              productId: event.product.id,
-              quantity: 1,
-              name: event.product.name,
-              price: event.product.salePrice,
-              regularPrice: event.product.regularPrice);
-          print(productCard.length);
-          productCard.add(cardProduct);
-
-          // productCard.add(CardProduct(
-          //     productId: event.product.id,
-          //     quantity: 1,
-          //     name: event.product.name,
-          //     price: event.product.salePrice,
-          //     regularPrice: event.product.regularPrice));
-          // productCardTwo.addAll(productCard);
-          emit(ProductCardLoaded(productCardBloc: productCard));
+          List<Product> listProducts = [];
+          listProducts.add(event.product);
+          print(listProducts.length);
+          emit(ProductCardLoaded(
+              productCard: ProductCard(products: listProducts)));
         } catch (e) {
           emit(ProductCardError(errorMessage: 'Что то не так'));
         }

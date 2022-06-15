@@ -13,11 +13,11 @@ class ProductCardLoading extends ProductCardState {
 }
 
 class ProductCardLoaded extends ProductCardState {
-  List<CardProduct> productCardBloc;
+  final ProductCard productCard;
 
-  ProductCardLoaded({required this.productCardBloc});
+  const ProductCardLoaded({required this.productCard});
   @override
-  List<Object> get props => [productCardBloc];
+  List<Object> get props => [productCard];
 }
 
 class ProductCardError extends ProductCardState {

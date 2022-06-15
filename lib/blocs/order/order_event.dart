@@ -10,7 +10,7 @@ abstract class OrderEvent extends Equatable {
 class CreateOrder extends OrderEvent {
   String firstName;
   String lastName;
-  List<CardProduct> cardProduct;
+  List<Product> cardProduct;
   String adres;
   String city;
   String postCode;

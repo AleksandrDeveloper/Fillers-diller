@@ -14,9 +14,10 @@ class WishlistLoading extends WishlistState {
 
 class WishlistLoaded extends WishlistState {
   List<Product> wishlistProduct = [];
-  WishlistLoaded({required this.wishlistProduct});
+  int totalPrise;
+  WishlistLoaded({required this.wishlistProduct, required this.totalPrise});
   @override
-  List<Object> get props => [wishlistProduct];
+  List<Object> get props => [wishlistProduct, totalPrise];
 }
 
 class WishlistError extends WishlistState {

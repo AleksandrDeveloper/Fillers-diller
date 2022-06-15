@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/category_product/category_product_bloc.dart';
+import '../blocs/product_card/product_card_bloc.dart';
 import '../blocs/wishlist/wishlist_bloc.dart';
 import '../widgets/bottom_bar_widget.dart';
 import '../widgets/product_card_max.dart';
@@ -45,12 +46,24 @@ class CategoryScreenWidget extends StatelessWidget {
             itemCount: state.categoryProduct.length,
             itemBuilder: (context, index) {
               return ProductCardMax(
+                widgetTwo: IconButton(
+                  onPressed: () {
+                    BlocProvider.of<WishlistBloc>(context).add(
+                      AddProductWishlist(
+                          context: context,
+                          product: state.categoryProduct[index]),
+                    );
+                  },
+                  icon: const Icon(Icons.favorite, color: Colors.red),
+                ),
                 widget: IconButton(
-                    onPressed: () => BlocProvider.of<WishlistBloc>(context).add(
-                        AddProductWishlist(
-                            context: context,
-                            product: state.categoryProduct[index])),
-                    icon: const Icon(Icons.favorite, color: Colors.red)),
+                  onPressed: () {
+                    BlocProvider.of<ProductCardBloc>(context).add(
+                      AddProductToCard(product: state.categoryProduct[index]),
+                    );
+                  },
+                  icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                ),
                 index: index,
                 product: state.categoryProduct[index],
               );

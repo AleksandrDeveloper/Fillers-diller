@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import '../blocs/product_card/product_card_bloc.dart';
 import '../blocs/search_product/search_product_bloc.dart';
 import '../blocs/wishlist/wishlist_bloc.dart';
 import '../widgets/bottom_bar_widget.dart';
@@ -47,12 +48,25 @@ class SearchProductWidget extends StatelessWidget {
                 itemCount: state.searchProduct.length,
                 itemBuilder: (context, index) {
                   return ProductCardMax(
+                    widgetTwo: IconButton(
+                      onPressed: () {
+                        BlocProvider.of<WishlistBloc>(context).add(
+                          AddProductWishlist(
+                              context: context,
+                              product: state.searchProduct[index]),
+                        );
+                      },
+                      icon: const Icon(Icons.favorite, color: Colors.red),
+                    ),
                     widget: IconButton(
-                        onPressed: () => BlocProvider.of<WishlistBloc>(context)
-                            .add(AddProductWishlist(
-                                context: context,
-                                product: state.searchProduct[index])),
-                        icon: const Icon(Icons.favorite, color: Colors.red)),
+                      onPressed: () {
+                        BlocProvider.of<ProductCardBloc>(context).add(
+                          AddProductToCard(product: state.searchProduct[index]),
+                        );
+                      },
+                      icon:
+                          const Icon(Icons.shopping_cart, color: Colors.white),
+                    ),
                     index: index,
                     product: state.searchProduct[index],
                   );

@@ -3,6 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/auth/auth_bloc.dart';
+import '../modal/test_modal.dart';
 
 class AuthWigget extends StatelessWidget {
   const AuthWigget({Key? key}) : super(key: key);
@@ -23,6 +24,8 @@ class AuthScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginController = TextEditingController();
     final paswordController = TextEditingController();
+    final modal = TestModalProduct();
+    modal.quantity;
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {

@@ -14,14 +14,13 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
       emit(WishlistLoading());
       try {
         productWorc.add(event.product);
-
-        // productCard
-        //     .add(ProductCardOrder(productId: event.product.id, quantity: 10));
-
+        int totalPrise = productWorc.fold(
+            0, (previousValue, element) => previousValue + element.prise);
         ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
           content: Text('Товар добавлена в избранное'),
         ));
-        emit(WishlistLoaded(wishlistProduct: productWorc));
+        emit(WishlistLoaded(
+            wishlistProduct: productWorc, totalPrise: totalPrise));
       } catch (e) {
         emit(WishlistError(errorMassage: 'Что то пошло не так'));
       }
@@ -34,7 +33,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
         ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
           content: Text('Товар удален из избранного'),
         ));
-        emit(WishlistLoaded(wishlistProduct: productWorc));
+        emit(WishlistLoaded(wishlistProduct: productWorc, totalPrise: 0));
       } catch (e) {
         emit(WishlistError(errorMassage: 'Что то пошло не так'));
       }

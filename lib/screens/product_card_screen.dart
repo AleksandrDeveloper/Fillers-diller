@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testfff/modal/order_product.dart';
 import '../api_client/api_client.dart';
 import '../blocs/details_product/details_product_bloc.dart';
 import '../blocs/product_card/product_card_bloc.dart';
@@ -61,7 +60,6 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final modal = ApiClient();
     return BlocBuilder<ProductCardBloc, ProductCardState>(
       builder: (context, state) {
         if (state is ProductCardLoading) {
@@ -77,7 +75,7 @@ class ProductCardWidget extends StatelessWidget {
               SizedBox(
                 height: 400,
                 child: ListView.builder(
-                  itemCount: state.productCardBloc.length,
+                  itemCount: state.productCard.products.length,
                   itemBuilder: (context, index) {
                     return Container(
                       child: Padding(
@@ -87,8 +85,8 @@ class ProductCardWidget extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(state.productCardBloc[index].name),
-                                Text('${state.productCardBloc[index].quantity}')
+                                Text(state.productCard.products[index].name),
+                                Text('${state.productCard.totalPrise}')
                               ],
                             )
                           ],
@@ -102,7 +100,7 @@ class ProductCardWidget extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pushNamed(
                         'home_screen/card_screen/order',
-                        arguments: state.productCardBloc);
+                        arguments: state.productCard.products);
                   },
                   child: const Text('Оформить заказ'))
             ],

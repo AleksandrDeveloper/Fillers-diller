@@ -35,24 +35,42 @@ class WishlistScreenWidget extends StatelessWidget {
         if (state is WishlistLoaded) {
           return state.wishlistProduct.length <= 0
               ? const NoProductWidget()
-              : ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: state.wishlistProduct.length,
-                  itemBuilder: (context, index) {
-                    return ProductCardMax(
-                      widget: IconButton(
-                          onPressed: () {
-                            BlocProvider.of<WishlistBloc>(context).add(
-                                RemoveProductWishlist(
-                                    context: context,
-                                    product: state.wishlistProduct[index]));
-                          },
-                          icon: const Icon(Icons.delete, color: Colors.red)),
-                      index: index,
-                      product: state.wishlistProduct[index],
-                    );
-                  });
+              : Column(
+                  children: [
+                    Text('total prise ${state.totalPrise}'),
+                    ListView.builder(
+                        primary: false,
+                        shrinkWrap: true,
+                        itemCount: state.wishlistProduct.length,
+                        itemBuilder: (context, index) {
+                          return ProductCardMax(
+                            widgetTwo: IconButton(
+                              onPressed: () {
+                                BlocProvider.of<WishlistBloc>(context).add(
+                                  RemoveProductWishlist(
+                                      context: context,
+                                      product: state.wishlistProduct[index]),
+                                );
+                              },
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                            ),
+                            widget: IconButton(
+                              onPressed: () {
+                                BlocProvider.of<WishlistBloc>(context).add(
+                                  RemoveProductWishlist(
+                                      context: context,
+                                      product: state.wishlistProduct[index]),
+                                );
+                              },
+                              icon: const Icon(Icons.shopping_cart,
+                                  color: Colors.white),
+                            ),
+                            index: index,
+                            product: state.wishlistProduct[index],
+                          );
+                        }),
+                  ],
+                );
         }
         if (state is WishlistError) {
           return Center(

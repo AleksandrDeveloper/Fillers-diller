@@ -4,10 +4,11 @@ import 'package:testfff/api_client/api_client.dart';
 import '../blocs/order/order_bloc.dart';
 import '../modal/card_product.dart';
 import '../modal/order_product.dart';
+import '../modal/product_modal.dart';
 import '../widgets/title_widget.dart';
 
 class OrderScreen extends StatelessWidget {
-  final List<CardProduct> cardProduct;
+  final List<Product> cardProduct;
   const OrderScreen({Key? key, required this.cardProduct}) : super(key: key);
 
   @override
@@ -22,7 +23,7 @@ class OrderScreen extends StatelessWidget {
 }
 
 class OrderWidget extends StatelessWidget {
-  final List<CardProduct> cardProduct;
+  final List<Product> cardProduct;
   const OrderWidget({Key? key, required this.cardProduct}) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class OrderWidget extends StatelessWidget {
     final countryController = TextEditingController();
     final cityController = TextEditingController();
     final adresController = TextEditingController();
-    final client = ApiClient();
+
     return ListView(
       primary: false,
       shrinkWrap: true,

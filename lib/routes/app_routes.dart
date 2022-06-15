@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../modal/card_product.dart';
+import '../modal/product_modal.dart';
 import '../screens/auth_screen.dart';
 import '../screens/category_screen.dart';
 import '../screens/home_screen.dart';
@@ -36,7 +37,7 @@ class AppRoutes {
     },
     'home_screen/card_screen/order': (context) {
       final cartProductT =
-          ModalRoute.of(context)!.settings.arguments as List<CardProduct>;
+          ModalRoute.of(context)!.settings.arguments as List<Product>;
 
       return OrderScreen(cardProduct: cartProductT);
     },
