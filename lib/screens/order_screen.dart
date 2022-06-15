@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testfff/api_client/api_client.dart';
 import '../blocs/order/order_bloc.dart';
-import '../modal/card_product.dart';
-import '../modal/order_product.dart';
 import '../modal/product_modal.dart';
 import '../widgets/title_widget.dart';
 

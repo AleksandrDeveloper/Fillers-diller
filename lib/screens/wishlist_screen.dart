@@ -37,7 +37,6 @@ class WishlistScreenWidget extends StatelessWidget {
               ? const NoProductWidget()
               : Column(
                   children: [
-                    Text('total prise ${state.totalPrise}'),
                     ListView.builder(
                         primary: false,
                         shrinkWrap: true,

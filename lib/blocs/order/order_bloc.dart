@@ -14,7 +14,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<CreateOrder>((event, emit) async {
       orderProduct.add(OrderProduct(
           productId: event.cardProduct.first.id,
-          quantity: event.cardProduct.first.id)); //заменить за количество//
+          quantity: 1)); //заменить за количество//
       var userIdBox = await Hive.openBox<int>('userIdBox');
       final userId = userIdBox.get('userIdKey') as int;
       userIdBox.close();

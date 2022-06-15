@@ -9,7 +9,6 @@ abstract class ProductCardEvent extends Equatable {
 
 class AddProductToCard extends ProductCardEvent {
   final Product product;
-
   const AddProductToCard({
     required this.product,
   });

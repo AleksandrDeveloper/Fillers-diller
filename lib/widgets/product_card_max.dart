@@ -51,20 +51,26 @@ class ProductCardMax extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 150,
-                          ),
-                          Text(
-                            product.name,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 16),
-                          ),
-                        ],
+                      Expanded(
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 150,
+                            ),
+                            Expanded(
+                              child: Text(
+                                product.name,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Text(
-                        '${product.prise} р',
+                        '${product.regularPrice} р',
                         style: const TextStyle(color: Colors.white),
                       ),
                       Padding(

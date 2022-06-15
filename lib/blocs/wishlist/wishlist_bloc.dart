@@ -15,7 +15,9 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
       try {
         productWorc.add(event.product);
         int totalPrise = productWorc.fold(
-            0, (previousValue, element) => previousValue + element.prise);
+            0,
+            (previousValue, element) =>
+                previousValue + element.regularPriceInt);
         ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
           content: Text('Товар добавлена в избранное'),
         ));

@@ -35,7 +35,7 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
               ),
             ),
             IconButton(
-              onPressed: () async {
+              onPressed: () {
                 Navigator.of(context).pushNamed('home_screen/card_screen');
               },
               icon: const Icon(

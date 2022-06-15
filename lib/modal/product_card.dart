@@ -7,7 +7,7 @@ class ProductCard extends Equatable {
   final List<Product> products;
 
   int get totalPrise => products.fold(
-      0, (previousValue, element) => previousValue += element.prise);
+      0, (previousValue, element) => previousValue += element.regularPriceInt);
 
   int get quntity =>
       products.fold(1, (previousValue, element) => previousValue += 1);

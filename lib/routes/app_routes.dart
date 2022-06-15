@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
-import '../modal/card_product.dart';
 import '../modal/product_modal.dart';
 import '../screens/auth_screen.dart';
 import '../screens/category_screen.dart';

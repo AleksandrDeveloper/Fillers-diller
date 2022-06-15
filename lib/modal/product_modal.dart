@@ -9,6 +9,7 @@ class Product extends Equatable {
   String shortDescription;
   String description;
   String regularPrice;
+  int quntity;
   String salePrice;
   List<CategoryProduct> category;
   List<ImagesProduct> images;
@@ -18,6 +19,7 @@ class Product extends Equatable {
     this.onSale,
     this.description,
     this.featured,
+    this.quntity,
     this.id,
     this.images,
     this.name,
@@ -26,10 +28,11 @@ class Product extends Equatable {
     this.shortDescription,
   );
 
-  int get prise => int.parse(regularPrice);
+  int get regularPriceInt => int.parse(regularPrice);
 
   Product.fromJson(Map<String, dynamic> json)
       : id = json['id'],
+        quntity = 1,
         onSale = json['on_sale'],
         name = json['name'],
         featured = json['featured'],

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../modal/card_product.dart';
 import '../../modal/product_card.dart';
 import '../../modal/product_modal.dart';
 part 'product_card_event.dart';
@@ -8,18 +7,22 @@ part 'product_card_state.dart';
 
 class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
   ProductCardBloc() : super(ProductCardLoading()) {
-    List<ProductCard> productCard;
+    List<Product> listProducts = [];
 
-    ProductCard product;
     on<AddProductToCard>(
       (event, emit) {
         emit(ProductCardLoading());
         try {
-          List<Product> listProducts = [];
           listProducts.add(event.product);
+          int tottalPrises = listProducts.fold(
+              0,
+              (previousValue, element) =>
+                  previousValue + element.regularPriceInt);
+
           print(listProducts.length);
           emit(ProductCardLoaded(
-              productCard: ProductCard(products: listProducts)));
+            productCard: ProductCard(products: listProducts),
+          ));
         } catch (e) {
           emit(ProductCardError(errorMessage: 'Что то не так'));
         }
