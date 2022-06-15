@@ -44,8 +44,6 @@ class ApiClient {
       "payment_method": "bacs",
       "payment_method_title": "Прямой банковский перевод",
       "set_paid": true,
-      "customer_id": userId,
-      "created_via": "Мобильное приложение",
       "billing": {
         "first_name": firstName,
         "last_name": lastName,

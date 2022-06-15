@@ -26,3 +26,17 @@ class DeleteProductToCard extends ProductCardEvent {
   @override
   List<Object> get props => [product];
 }
+
+class PudQuntity extends ProductCardEvent {
+  Product product;
+  PudQuntity({required this.product});
+  @override
+  List<Object> get props => [product];
+}
+
+class RemuveQuntity extends ProductCardEvent {
+  Product product;
+  RemuveQuntity({required this.product});
+  @override
+  List<Object> get props => [product];
+}

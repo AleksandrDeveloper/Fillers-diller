@@ -8,20 +8,28 @@ part 'product_card_state.dart';
 class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
   ProductCardBloc() : super(ProductCardLoading()) {
     List<Product> listProducts = [];
+    List<Product> uniquelist = [];
+    int tottalPrises = 0;
+    var newList;
+    Product product;
 
     on<AddProductToCard>(
       (event, emit) {
         emit(ProductCardLoading());
         try {
           listProducts.add(event.product);
-          int tottalPrises = listProducts.fold(
-              0,
-              (previousValue, element) =>
-                  previousValue + element.regularPriceInt);
+          int prise = int.parse(event.product.regularPrice);
 
+          tottalPrises = tottalPrises += prise;
+          // tottalPrises = listProducts.fold(
+          //     tottalPrises,
+          //     (previousValue, element) =>
+          //         previousValue + element.regularPriceInt);
+          print(tottalPrises);
           print(listProducts.length);
           emit(ProductCardLoaded(
             productCard: ProductCard(products: listProducts),
+            newQuntity: tottalPrises,
           ));
         } catch (e) {
           emit(ProductCardError(errorMessage: 'Что то не так'));
@@ -43,5 +51,35 @@ class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
     //     }
     //   },
     // );
+
+    on<PudQuntity>((event, emit) {
+      try {
+        var product = event.product;
+        // listProducts.add(event.product);
+        int newQuntity = product.quntity += 1;
+        int prise = int.parse(event.product.regularPrice);
+
+        tottalPrises = tottalPrises += prise;
+
+        emit(ProductCardLoaded(
+            productCard: ProductCard(products: listProducts),
+            newQuntity: tottalPrises));
+        print(tottalPrises);
+      } catch (e) {}
+    });
+
+    on<RemuveQuntity>((event, emit) {
+      try {
+        var product = event.product;
+
+        int newQuntity = product.quntity -= 1;
+        int prise = int.parse(event.product.regularPrice);
+
+        tottalPrises = tottalPrises -= prise;
+        emit(ProductCardLoaded(
+            productCard: ProductCard(products: listProducts),
+            newQuntity: tottalPrises));
+      } catch (e) {}
+    });
   }
 }

@@ -14,10 +14,14 @@ class ProductCardLoading extends ProductCardState {
 
 class ProductCardLoaded extends ProductCardState {
   final ProductCard productCard;
+  final int newQuntity;
 
-  const ProductCardLoaded({required this.productCard});
+  ProductCardLoaded({
+    required this.productCard,
+    required this.newQuntity,
+  });
   @override
-  List<Object> get props => [productCard];
+  List<Object> get props => [productCard, newQuntity];
 }
 
 class ProductCardError extends ProductCardState {

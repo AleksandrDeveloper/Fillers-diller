@@ -19,6 +19,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         print(Text('hello'));
         var userIdBox = await Hive.openBox<int>('userIdBox');
         final userId = userIdBox.get('userIdKey') as int;
+
         userIdBox.close();
         final jsonUser = await client.searchUser(userId);
         print('Это id из бокса $userId');
