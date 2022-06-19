@@ -67,7 +67,7 @@ class ProductCardWidget extends StatelessWidget {
                         height: 20,
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height - 400,
+                        height: 350,
                         child: ListView.builder(
                           itemCount: state.productCard.products.length,
                           itemBuilder: (context, index) {

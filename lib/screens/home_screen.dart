@@ -58,7 +58,6 @@ class HomeScreenWidget extends StatelessWidget {
       primary: false,
       shrinkWrap: true,
       children: [
-        const SearchAppBar(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(

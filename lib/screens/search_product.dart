@@ -4,6 +4,7 @@ import '../blocs/product_card/product_card_bloc.dart';
 import '../blocs/search_product/search_product_bloc.dart';
 import '../blocs/wishlist/wishlist_bloc.dart';
 import '../widgets/bottom_bar_widget.dart';
+import '../widgets/no_product.dart';
 import '../widgets/product_card_max.dart';
 import '../widgets/search_app_bar.dart';
 import '../widgets/sliver_app_bar.dart';
@@ -35,8 +36,8 @@ class SearchProductWidget extends StatelessWidget {
     return BlocBuilder<SearchProductBloc, SearchProductState>(
       builder: (context, state) {
         if (state is SearchProductLoading) {
-          return const CircularProgressIndicator(
-            color: Colors.red,
+          return const NoProductWidget(
+            title: 'Список пуст',
           );
         }
         if (state is SearchProductLoaded) {

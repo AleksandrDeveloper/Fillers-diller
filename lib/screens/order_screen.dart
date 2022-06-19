@@ -103,32 +103,33 @@ class OrderWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 120,
+                height: 90,
               ),
               InkWell(
-                  onTap: () {
-                    final firstName = firstNameController.text;
-                    final lastName = lastNameController.text;
-                    final email = emailController.text;
-                    final phone = phoneController.text;
-                    final country = countryController.text;
-                    final city = cityController.text;
-                    final adres = adresController.text;
+                onTap: () {
+                  final firstName = firstNameController.text;
+                  final lastName = lastNameController.text;
+                  final email = emailController.text;
+                  final phone = phoneController.text;
+                  final country = countryController.text;
+                  final city = cityController.text;
+                  final adres = adresController.text;
 
-                    BlocProvider.of<OrderBloc>(context).add(CreateOrder(
-                        adres: adres,
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        phone: phone,
-                        country: country,
-                        city: city,
-                        postCode: '140033',
-                        cardProduct: cardProduct));
-                  },
-                  child: Buttom(
-                    title: 'Отправить заказ',
-                  )),
+                  BlocProvider.of<OrderBloc>(context).add(CreateOrder(
+                      adres: adres,
+                      firstName: firstName,
+                      lastName: lastName,
+                      email: email,
+                      phone: phone,
+                      country: country,
+                      city: city,
+                      postCode: '140033',
+                      cardProduct: cardProduct));
+                },
+                child: const Buttom(
+                  title: 'Отправить заказ',
+                ),
+              ),
             ],
           ),
         )

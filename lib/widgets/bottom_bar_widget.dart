@@ -55,6 +55,15 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
             ),
             IconButton(
               onPressed: () {
+                Navigator.of(context).pushNamed('home_screen/search_product');
+              },
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
                 BlocProvider.of<UserBloc>(context)
                     .add(AddUser(context: context));
               },
