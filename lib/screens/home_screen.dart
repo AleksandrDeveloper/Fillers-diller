@@ -36,7 +36,7 @@ class CategoryListWidget extends StatelessWidget {
     return Scaffold(
       body: SliverAppBer(
         widget: buildScreen(),
-        title: const SearchAppBar(),
+        title: const Text('Fillers Diller'), //const SearchAppBar()
         NavBar: BottomBarWidget(),
       ),
     );
@@ -58,6 +58,7 @@ class HomeScreenWidget extends StatelessWidget {
       primary: false,
       shrinkWrap: true,
       children: [
+        const SearchAppBar(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(

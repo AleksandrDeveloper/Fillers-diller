@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/order/order_bloc.dart';
 import '../modal/product_modal.dart';
+import '../widgets/buttom.dart';
 import '../widgets/title_widget.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -11,7 +12,11 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Оформление заказа')),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text('Оформление заказа'),
+        centerTitle: true,
+      ),
       body: OrderWidget(
         cardProduct: cardProduct,
       ),
@@ -98,10 +103,10 @@ class OrderWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 80,
+                height: 120,
               ),
-              ElevatedButton(
-                  onPressed: () {
+              InkWell(
+                  onTap: () {
                     final firstName = firstNameController.text;
                     final lastName = lastNameController.text;
                     final email = emailController.text;
@@ -121,7 +126,9 @@ class OrderWidget extends StatelessWidget {
                         postCode: '140033',
                         cardProduct: cardProduct));
                   },
-                  child: const Text('Отправить заказ Bloc')),
+                  child: Buttom(
+                    title: 'Отправить заказ',
+                  )),
             ],
           ),
         )

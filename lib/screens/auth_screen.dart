@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../app_images.dart';
 import '../blocs/auth/auth_bloc.dart';
 import '../modal/test_modal.dart';
 
@@ -34,8 +35,7 @@ class AuthScreenWidget extends StatelessWidget {
             body: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(
-                        'https://f.vividscreen.info/soft/99e113ed6e308f8bca36ddeb20e33c00/Shiny-Traces-of-Tears-1080x1920.jpg'),
+                    image: AssetImage(AppImages.bacgrountAuth),
                     fit: BoxFit.cover),
               ),
               child: BackdropFilter(
@@ -48,10 +48,7 @@ class AuthScreenWidget extends StatelessWidget {
                     children: [
                       ZoomIn(
                         child: const Image(
-                          width: 250,
-                          image: NetworkImage(
-                              'https://fillers-diller.ru/wp-content/uploads/2021/05/1620743215730-2.png'),
-                        ),
+                            width: 250, image: AssetImage(AppImages.logo)),
                       ),
                       const SizedBox(
                         height: 50,

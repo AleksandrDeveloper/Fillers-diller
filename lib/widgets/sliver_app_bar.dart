@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../app_images.dart';
+
 class SliverAppBer extends StatelessWidget {
   final Widget widget;
   final Widget NavBar;
@@ -21,13 +23,12 @@ class SliverAppBer extends StatelessWidget {
             backgroundColor: Colors.black87,
             expandedHeight: 150,
             flexibleSpace: FlexibleSpaceBar(
-              title: title,
-              centerTitle: true,
-              background: Image.network(
-                'https://fillers-diller.ru/wp-content/uploads/2022/05/Дизайн-без-названия-4.png',
-                fit: BoxFit.cover,
-              ),
-            ),
+                title: title,
+                centerTitle: true,
+                background: const Image(
+                  image: AssetImage(AppImages.bacgrountSliver),
+                  fit: BoxFit.cover,
+                )),
             floating: true,
             pinned: true,
             actions: [],

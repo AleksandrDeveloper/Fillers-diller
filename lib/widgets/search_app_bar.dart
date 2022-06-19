@@ -17,14 +17,14 @@ class SearchAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            height: 30,
-            width: 195,
+            height: 40,
+            width: MediaQuery.of(context).size.width - 80,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: const Color.fromRGBO(244, 244, 244, 1),
+              color: Colors.white,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
                 decoration: const InputDecoration(
                   hintText: 'Поиск',
@@ -35,18 +35,21 @@ class SearchAppBar extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            onPressed: () {
-              final searchControllerText = searchController.text;
-              BlocProvider.of<SearchProductBloc>(context).add(
-                GetProduct(
-                    searchProductString: searchControllerText,
-                    context: context),
-              );
-            },
-            icon: const Icon(
-              Icons.search,
-              color: Colors.white,
+          Expanded(
+            child: IconButton(
+              onPressed: () {
+                final searchControllerText = searchController.text;
+                BlocProvider.of<SearchProductBloc>(context).add(
+                  GetProduct(
+                      searchProductString: searchControllerText,
+                      context: context),
+                );
+              },
+              icon: const Icon(
+                Icons.search,
+                size: 30,
+                color: Colors.black,
+              ),
             ),
           )
         ],

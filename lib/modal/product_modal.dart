@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'category_modal.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:html/dom.dart';
 
 class Product extends Equatable {
   int id;
@@ -27,6 +29,8 @@ class Product extends Equatable {
     this.salePrice,
     this.shortDescription,
   );
+
+  String get descriptionHtml => parse(shortDescription).body!.text;
 
   int get regularPriceInt => int.parse(regularPrice);
 

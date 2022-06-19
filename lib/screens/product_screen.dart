@@ -167,7 +167,7 @@ class ProductScreenWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text(state.detailsProducts.shortDescription),
+                      Text(state.detailsProducts.descriptionHtml),
                     ],
                   ),
                 ),
