@@ -30,7 +30,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         email: event.email,
         phone: event.phone,
       );
-      print('object');
       emit(OrderGood(createOrder: createOrder));
     });
   }

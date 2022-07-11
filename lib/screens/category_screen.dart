@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../blocs/category_product/category_product_bloc.dart';
 import '../blocs/product_card/product_card_bloc.dart';
 import '../blocs/wishlist/wishlist_bloc.dart';
-import '../widgets/bottom_bar_widget.dart';
 import '../widgets/product_card_max.dart';
 import '../widgets/widgets.dart';
 

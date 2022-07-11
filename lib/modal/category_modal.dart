@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class CategoryProduct extends Equatable {
-  int id;
-  String name;
+  final int id;
+  final String name;
 
-  CategoryProduct(
-    this.id,
-    this.name,
-  );
+  CategoryProduct({
+    required this.id,
+    required this.name,
+  });
 
   CategoryProduct.fromJson(Map<String, dynamic> json)
       : id = json['id'],

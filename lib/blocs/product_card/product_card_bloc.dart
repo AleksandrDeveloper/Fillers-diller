@@ -23,7 +23,7 @@ class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
             newQuntity: tottalPrises,
           ));
         } catch (e) {
-          emit(ProductCardError(errorMessage: 'Что то не так'));
+          emit(const ProductCardError(errorMessage: 'Что то не так'));
         }
       },
     );

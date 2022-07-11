@@ -13,18 +13,15 @@ class AllProductLoading extends AllProductState {
 }
 
 class AllProductLoaded extends AllProductState {
-  final List<Product> productFeatured;
-  final List<Product> productOnSale;
+  final List<Product> products;
 
   const AllProductLoaded({
-    required this.productFeatured,
-    required this.productOnSale,
+    required this.products,
   });
 
   @override
   List<Object> get props => [
-        productFeatured,
-        productOnSale,
+        products,
       ];
 }
 

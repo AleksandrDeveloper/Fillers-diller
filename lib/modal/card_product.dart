@@ -14,11 +14,11 @@ class CardProduct {
     required this.regularPrice,
   });
 
-  int productId;
-  int quantity;
-  String name;
-  String price;
-  String regularPrice;
+  final int productId;
+  final int quantity;
+  final String name;
+  final String price;
+  final String regularPrice;
 
   factory CardProduct.fromJson(Map<String, dynamic> json) => CardProduct(
         productId: json["product_id"],

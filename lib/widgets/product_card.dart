@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/details_product/details_product_bloc.dart';
@@ -14,7 +15,7 @@ class ProductCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => BlocProvider.of<DetailsProductBloc>(context)
           .add(GetDetailProduct(productId: product.id, context: context)),
       child: SizedBox(
@@ -66,16 +67,16 @@ class ProductCardWidget extends StatelessWidget {
                       ),
                     )),
               ),
-              Container(
-                width: 150,
-                height: 140,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(product.images[0].src == null
-                          ? 'https://1ve19i29lklo3d9qyr26auc3-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/shutterstock_642137359-pdf.jpg'
-                          : product.images[0].src),
-                      fit: BoxFit.cover),
-                  borderRadius: BorderRadius.circular(20),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: CachedNetworkImage(
+                  width: 150,
+                  height: 140,
+                  imageUrl: product.images[0].src,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ],

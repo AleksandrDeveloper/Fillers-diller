@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
+import 'package:testfff/config/api_client.dart';
 import '../blocs/all_category/all_category_bloc.dart';
 import '../blocs/all_product/all_product_bloc.dart';
 import '../blocs/splashScreen/splashscreen_bloc.dart';
@@ -32,8 +33,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
             navigateRoute: state.widget,
             duration: 4500,
             imageSize: 130,
-            imageSrc:
-                'https://fillers-diller.ru/wp-content/uploads/2021/05/1620743215730-2.png',
+            imageSrc: state.imageUrl,
             backgroundColor: Colors.black,
           );
         }

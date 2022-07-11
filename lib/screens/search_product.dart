@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../blocs/product_card/product_card_bloc.dart';
 import '../blocs/search_product/search_product_bloc.dart';
 import '../blocs/wishlist/wishlist_bloc.dart';
-import '../widgets/no_product.dart';
 import '../widgets/product_card_max.dart';
 import '../widgets/search_app_bar.dart';
 import '../widgets/widgets.dart';
@@ -19,7 +18,7 @@ class SearchProduct extends StatelessWidget {
         widget: const SearchAppBar(),
         iconLeft: IconButton(
           onPressed: () {
-            Navigator.of(context).pop;
+            Navigator.of(context).pop();
           },
           icon: const Icon(
             Icons.arrow_back,

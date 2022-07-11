@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../config/api_client.dart';
 
@@ -14,13 +18,21 @@ class AllProductBloc extends Bloc<AllProductEvent, AllProductState> {
     on<AllProductEvent>((event, emit) async {
       emit(AllProductLoading());
       try {
-        final productsFeat = await _client.getProductFeatured();
-        final productsSale = await _client.getProductOnSale();
-
-        emit(AllProductLoaded(
-            productOnSale: productsSale, productFeatured: productsFeat));
+        bool result = await InternetConnectionChecker().hasConnection;
+        if (result == true) {
+          final productsFeat = await _client.getProduct();
+          emit(AllProductLoaded(products: productsFeat));
+        } else {
+          final boxProduct = await Hive.openBox<String>('boxProduct');
+          final cashProduct = boxProduct.get('jsonProduct');
+          await boxProduct.close();
+          final reqestJson = jsonDecode(cashProduct!) as List;
+          List<Product> productJson =
+              reqestJson.map((json) => Product.fromJson(json)).toList();
+          emit(AllProductLoaded(products: productJson));
+        }
       } catch (e) {
-        emit(AllProductError(errorMassage: 'Что то пошло не так'));
+        emit(const AllProductError(errorMassage: 'Что то пошло не так'));
       }
     });
   }

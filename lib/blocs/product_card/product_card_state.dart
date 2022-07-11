@@ -16,7 +16,7 @@ class ProductCardLoaded extends ProductCardState {
   final ProductCard productCard;
   final int newQuntity;
 
-  ProductCardLoaded({
+  const ProductCardLoaded({
     required this.productCard,
     required this.newQuntity,
   });
@@ -25,8 +25,8 @@ class ProductCardLoaded extends ProductCardState {
 }
 
 class ProductCardError extends ProductCardState {
-  String errorMessage;
-  ProductCardError({required this.errorMessage});
+  final String errorMessage;
+  const ProductCardError({required this.errorMessage});
 
   @override
   List<Object> get props => [errorMessage];

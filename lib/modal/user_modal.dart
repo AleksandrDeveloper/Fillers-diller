@@ -1,11 +1,22 @@
-import 'dart:convert';
-
-User userFromJson(String str) => User.fromJson(json.decode(str));
-
-String userToJson(User data) => json.encode(data.toJson());
-
 class User {
-  User({
+  final int id;
+  final DateTime dateCreated;
+  final DateTime dateCreatedGmt;
+  final DateTime dateModified;
+  final DateTime dateModifiedGmt;
+  final String email;
+  final String firstName;
+  final String lastName;
+  final String role;
+  final String username;
+  final Ing billing;
+  final Ing shipping;
+  final bool isPayingCustomer;
+  final String avatarUrl;
+  final List<MetaDatum> metaData;
+  final Links links;
+
+  const User({
     required this.id,
     required this.dateCreated,
     required this.dateCreatedGmt,
@@ -20,22 +31,9 @@ class User {
     required this.shipping,
     required this.isPayingCustomer,
     required this.avatarUrl,
+    required this.metaData,
+    required this.links,
   });
-
-  int id;
-  DateTime dateCreated;
-  DateTime dateCreatedGmt;
-  DateTime dateModified;
-  DateTime dateModifiedGmt;
-  String email;
-  String firstName;
-  String lastName;
-  String role;
-  String username;
-  Ing billing;
-  Ing shipping;
-  bool isPayingCustomer;
-  String avatarUrl;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -52,6 +50,9 @@ class User {
         shipping: Ing.fromJson(json["shipping"]),
         isPayingCustomer: json["is_paying_customer"],
         avatarUrl: json["avatar_url"],
+        metaData: List<MetaDatum>.from(
+            json["meta_data"].map((x) => MetaDatum.fromJson(x))),
+        links: Links.fromJson(json["_links"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,35 +70,37 @@ class User {
         "shipping": shipping.toJson(),
         "is_paying_customer": isPayingCustomer,
         "avatar_url": avatarUrl,
+        "meta_data": List<dynamic>.from(metaData.map((x) => x.toJson())),
+        "_links": links.toJson(),
       };
 }
 
 class Ing {
-  Ing({
+  const Ing({
     required this.firstName,
     required this.lastName,
     required this.company,
     required this.address1,
     required this.address2,
     required this.city,
-    required this.state,
     required this.postcode,
     required this.country,
+    required this.state,
     required this.email,
     required this.phone,
   });
 
-  String firstName;
-  String lastName;
-  String company;
-  String address1;
-  String address2;
-  String city;
-  String state;
-  String postcode;
-  String country;
-  String? email;
-  String? phone;
+  final String firstName;
+  final String lastName;
+  final String company;
+  final String address1;
+  final String address2;
+  final String city;
+  final String postcode;
+  final String country;
+  final String state;
+  final String email;
+  final String phone;
 
   factory Ing.fromJson(Map<String, dynamic> json) => Ing(
         firstName: json["first_name"],
@@ -106,11 +109,11 @@ class Ing {
         address1: json["address_1"],
         address2: json["address_2"],
         city: json["city"],
-        state: json["state"],
         postcode: json["postcode"],
         country: json["country"],
+        state: json["state"],
         email: json["email"] == null ? null : json["email"],
-        phone: json["phone"] == null ? null : json["phone"],
+        phone: json["phone"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -120,10 +123,92 @@ class Ing {
         "address_1": address1,
         "address_2": address2,
         "city": city,
-        "state": state,
         "postcode": postcode,
         "country": country,
+        "state": state,
         "email": email == null ? null : email,
-        "phone": phone == null ? null : phone,
+        "phone": phone,
+      };
+}
+
+class Links {
+  const Links({
+    required this.self,
+    required this.collection,
+  });
+
+  final List<Collection> self;
+  final List<Collection> collection;
+
+  factory Links.fromJson(Map<String, dynamic> json) => Links(
+        self: List<Collection>.from(
+            json["self"].map((x) => Collection.fromJson(x))),
+        collection: List<Collection>.from(
+            json["collection"].map((x) => Collection.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "self": List<dynamic>.from(self.map((x) => x.toJson())),
+        "collection": List<dynamic>.from(collection.map((x) => x.toJson())),
+      };
+}
+
+class Collection {
+  const Collection({
+    required this.href,
+  });
+
+  final String href;
+
+  factory Collection.fromJson(Map<String, dynamic> json) => Collection(
+        href: json["href"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "href": href,
+      };
+}
+
+class MetaDatum {
+  const MetaDatum({
+    required this.id,
+    required this.key,
+    required this.value,
+  });
+
+  final int id;
+  final String key;
+  final dynamic value;
+
+  factory MetaDatum.fromJson(Map<String, dynamic> json) => MetaDatum(
+        id: json["id"],
+        key: json["key"],
+        value: json["value"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "key": key,
+        "value": value,
+      };
+}
+
+class ValueClass {
+  const ValueClass({
+    required this.expires,
+    required this.products,
+  });
+
+  final int expires;
+  final List<dynamic> products;
+
+  factory ValueClass.fromJson(Map<String, dynamic> json) => ValueClass(
+        expires: json["expires"],
+        products: List<dynamic>.from(json["products"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "expires": expires,
+        "products": List<dynamic>.from(products.map((x) => x)),
       };
 }

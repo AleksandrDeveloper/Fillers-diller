@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:testfff/config/api_client.dart';
 
-import '../../storage/id_user_preferences.dart';
-import '../../storage/is_autf_pref.dart';
-
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -65,7 +62,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         emit(AuthTrue());
       } catch (e) {
-        emit(AuthError(errorMassege: 'Произошла ошибка'));
+        emit(const AuthError(errorMassege: 'Произошла ошибка'));
       }
     });
   }

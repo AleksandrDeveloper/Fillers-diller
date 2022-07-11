@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import '../modal/modals.dart';
 import '../modal/order_product.dart';
-import '../modal/user_modal.dart';
 
 class ApiClient {
   final client = http.Client();
@@ -14,13 +14,14 @@ class ApiClient {
     final url =
         '$_baseUrl/wp-json/wc/v3/customers/$userId?consumer_key=$_consumerKey&consumer_secret=$_consumerSecret';
     final response = await client.get(Uri.parse(url));
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       final requestJson =
           await jsonDecode(response.body) as Map<String, dynamic>;
-      final user = User.fromJson(requestJson);
-      print('Это имя пользователя полученого из apiClient ${user.firstName}');
-      return user;
+
+      final userJson = User.fromJson(requestJson);
+      print(userJson.firstName);
+      return userJson;
     } else {
       throw Error();
     }
@@ -134,7 +135,11 @@ class ApiClient {
     final response = await client.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      var reqestJson = jsonDecode(response.body) as List;
+      final boxProduct = await Hive.openBox<String>('boxProduct');
+      await boxProduct.clear();
+      boxProduct.put('jsonProduct', response.body);
+      await boxProduct.close();
+      final reqestJson = jsonDecode(response.body) as List;
 
       List<Product> productJson =
           reqestJson.map((json) => Product.fromJson(json)).toList();
@@ -192,42 +197,6 @@ class ApiClient {
       List<Product> productJson =
           reqestJson.map((json) => Product.fromJson(json)).toList();
       print(productJson);
-      return productJson;
-    } else {
-      throw UnimplementedError('error');
-    }
-  }
-
-  Future<List<Product>> getProductFeatured() async {
-    final url =
-        '$_baseUrl/wp-json/wc/v3/products/?consumer_key=$_consumerKey&consumer_secret=$_consumerSecret&featured=true';
-
-    final response = await client.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      var reqestJson = jsonDecode(response.body) as List;
-
-      List<Product> productJson =
-          reqestJson.map((json) => Product.fromJson(json)).toList();
-
-      return productJson;
-    } else {
-      throw UnimplementedError('error');
-    }
-  }
-
-  Future<List<Product>> getProductOnSale() async {
-    final url =
-        '$_baseUrl/wp-json/wc/v3/products/?consumer_key=$_consumerKey&consumer_secret=$_consumerSecret&on_sale=true';
-
-    final response = await client.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      var reqestJson = jsonDecode(response.body) as List;
-
-      List<Product> productJson =
-          reqestJson.map((json) => Product.fromJson(json)).toList();
-
       return productJson;
     } else {
       throw UnimplementedError('error');

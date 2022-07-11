@@ -14,7 +14,9 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
       color: Colors.transparent,
       child: Container(
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(topRight: Radius.circular(35.0)),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(35.0),
+          ),
           gradient: LinearGradient(
             colors: [Colors.black, Colors.black87],
           ),
@@ -78,5 +80,5 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(100.0);
 }

@@ -1,20 +1,19 @@
 import 'package:equatable/equatable.dart';
 import 'category_modal.dart';
 import 'package:html/parser.dart' show parse;
-import 'package:html/dom.dart';
 
 class Product extends Equatable {
-  int id;
-  String name;
-  bool featured;
-  bool onSale;
-  String shortDescription;
-  String description;
-  String regularPrice;
+  final int id;
+  final String name;
+  final bool featured;
+  final bool onSale;
+  final String shortDescription;
+  final String description;
+  final String regularPrice;
   int quntity;
-  String salePrice;
-  List<CategoryProduct> category;
-  List<ImagesProduct> images;
+  final String salePrice;
+  final List<CategoryProduct> category;
+  final List<ImagesProduct> images;
 
   Product(
     this.category,
@@ -67,8 +66,8 @@ class Product extends Equatable {
 }
 
 class ImagesProduct extends Equatable {
-  int id;
-  String src;
+  final int id;
+  final String src;
 
   ImagesProduct(
     this.id,

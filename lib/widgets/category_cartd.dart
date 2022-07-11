@@ -20,7 +20,6 @@ class CategoryCardWidget extends StatelessWidget {
         onTap: () {
           BlocProvider.of<CategoryProductBloc>(context)
               .add(GetCategory(categoryId: category.id, context: context));
-          print(category.id);
         },
         child: Container(
           width: 150,

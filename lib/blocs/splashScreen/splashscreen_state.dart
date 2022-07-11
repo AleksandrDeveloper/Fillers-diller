@@ -14,9 +14,16 @@ class SplashscreenLoading extends SplashscreenState {
 
 class SplashscreenLoaded extends SplashscreenState {
   final Widget widget;
+  final String imageUrl;
 
-  const SplashscreenLoaded({required this.widget});
+  const SplashscreenLoaded({
+    required this.widget,
+    required this.imageUrl,
+  });
 
   @override
-  List<Object> get props => [widget];
+  List<Object> get props => [
+        widget,
+        imageUrl,
+      ];
 }

@@ -55,91 +55,103 @@ class HomeScreenWidget extends StatelessWidget {
       primary: false,
       shrinkWrap: true,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              const TitleWidget(
+        Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 16.0,
+                top: 16.0,
+              ),
+              child: TitleWidget(
                 title: 'Популярные категории',
                 color: Colors.black,
               ),
-              BlocBuilder<AllCategoryBloc, AllCategoryState>(
-                builder: (context, state) {
-                  if (state is CategoryProductLoading) {
-                    return const CircularProgressIndicator(
-                      color: Colors.red,
-                    );
-                  }
-                  if (state is AllCategoryLoaded) {
-                    return SizedBox(
-                      height: 70,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.category.length,
-                        itemBuilder: (BuildContext context, index) {
-                          return CategoryCardWidget(
-                            index: index,
-                            category: state.category[index],
-                          );
-                        },
-                      ),
-                    );
-                  }
-                  if (state is AllCategoryError) {
-                    return Text(state.errorMassage);
-                  }
-                  return Container();
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const TitleWidget(
+            ),
+            BlocBuilder<AllCategoryBloc, AllCategoryState>(
+              builder: (context, state) {
+                if (state is CategoryProductLoading) {
+                  return const CircularProgressIndicator(
+                    color: Colors.red,
+                  );
+                }
+                if (state is AllCategoryLoaded) {
+                  return SizedBox(
+                    height: 70,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.category.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return CategoryCardWidget(
+                          index: index,
+                          category: state.category[index],
+                        );
+                      },
+                    ),
+                  );
+                }
+                if (state is AllCategoryError) {
+                  return Text(state.errorMassage);
+                }
+                return Container();
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: TitleWidget(
                 title: 'Рекомендуемые товары',
                 color: Colors.black,
               ),
-              BlocBuilder<AllProductBloc, AllProductState>(
-                  builder: (context, state) {
-                if (state is AllProductLoading) {
-                  return const CircularProgressIndicator(
-                    color: Colors.red,
-                  );
-                }
-                if (state is AllProductLoaded) {
-                  return BlocListProductFeatured(
-                      product: List.from(
-                    state.productFeatured,
-                  ));
-                }
-                if (state is AllProductError) {
-                  return Text(state.errorMassage);
-                }
-                return Container();
-              }),
-              const TitleWidget(
+            ),
+            BlocBuilder<AllProductBloc, AllProductState>(
+                builder: (context, state) {
+              if (state is AllProductLoading) {
+                return const CircularProgressIndicator(
+                  color: Colors.red,
+                );
+              }
+              if (state is AllProductLoaded) {
+                final productFeature = state.products
+                    .where((element) => element.featured)
+                    .toList();
+                return BlocListProductFeatured(
+                  product: productFeature,
+                );
+              }
+              if (state is AllProductError) {
+                return Text(state.errorMassage);
+              }
+              return Container();
+            }),
+            const Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: TitleWidget(
                 title: 'Товары по акции',
                 color: Colors.black,
               ),
-              BlocBuilder<AllProductBloc, AllProductState>(
-                  builder: (context, state) {
-                if (state is AllProductLoading) {
-                  return const CircularProgressIndicator(
-                    color: Colors.red,
-                  );
-                }
-                if (state is AllProductLoaded) {
-                  return BlocListProductOnSale(
-                      product: List.from(
-                    state.productOnSale,
-                  ));
-                }
-                if (state is AllProductError) {
-                  return Text(state.errorMassage);
-                }
-                return Container();
-              }),
-            ],
-          ),
+            ),
+            BlocBuilder<AllProductBloc, AllProductState>(
+                builder: (context, state) {
+              if (state is AllProductLoading) {
+                return const CircularProgressIndicator(
+                  color: Colors.red,
+                );
+              }
+              if (state is AllProductLoaded) {
+                final productSale =
+                    state.products.where((element) => element.onSale).toList();
+                return BlocListProductOnSale(
+                  product: productSale,
+                );
+              }
+              if (state is AllProductError) {
+                return Text(state.errorMassage);
+              }
+              return Container();
+            }),
+          ],
         ),
       ],
     );
@@ -162,6 +174,8 @@ class BlocListProductFeatured extends StatelessWidget {
         );
       }
       if (state is AllProductLoaded) {
+        final productFeature =
+            state.products.where((element) => element.featured).toList();
         return SizedBox(
           height: 200,
           child: ListView.builder(
@@ -170,7 +184,7 @@ class BlocListProductFeatured extends StatelessWidget {
             itemBuilder: (BuildContext context, index) {
               return ProductCardWidget(
                 index: index,
-                product: state.productFeatured[index],
+                product: productFeature[index],
               );
             },
           ),
@@ -199,6 +213,8 @@ class BlocListProductOnSale extends StatelessWidget {
         );
       }
       if (state is AllProductLoaded) {
+        final productSale =
+            state.products.where((element) => element.onSale).toList();
         return SizedBox(
           height: 200,
           child: ListView.builder(
@@ -207,7 +223,7 @@ class BlocListProductOnSale extends StatelessWidget {
             itemBuilder: (BuildContext context, index) {
               return ProductCardWidget(
                 index: index,
-                product: state.productOnSale[index],
+                product: productSale[index],
               );
             },
           ),

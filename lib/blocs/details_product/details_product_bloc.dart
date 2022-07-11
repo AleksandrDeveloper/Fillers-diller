@@ -21,7 +21,7 @@ class DetailsProductBloc
         Navigator.of(event.context).pushNamed('home_screen/product_screen');
         emit(DetailsProductLoaded(detailsProducts: detailsProduct));
       } catch (e) {
-        emit(DetailsProductError(errrorMasage: 'Какая то ошибка'));
+        emit(const DetailsProductError(errrorMasage: 'Какая то ошибка'));
       }
     });
   }

@@ -16,7 +16,7 @@ class AllCategoryBloc extends Bloc<AllCategoryEvent, AllCategoryState> {
         final categoryJson = await _client.getCategory();
         emit(AllCategoryLoaded(category: categoryJson));
       } catch (e) {
-        emit(AllCategoryError(errorMassage: 'Что то пошло не так'));
+        emit(const AllCategoryError(errorMassage: 'Что то пошло не так'));
       }
     });
   }

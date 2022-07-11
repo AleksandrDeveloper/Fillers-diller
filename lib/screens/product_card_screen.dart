@@ -48,7 +48,10 @@ class ProductCardWidget extends StatelessWidget {
         }
         if (state is ProductCardLoaded) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 10.0,
+            ),
             child: ListView(
               primary: false,
               shrinkWrap: true,

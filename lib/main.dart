@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:testfff/blocs/search_product/search_product_bloc.dart';
 import 'package:testfff/blocs/category_product/category_product_bloc.dart';
-import 'package:testfff/config/app_routes.dart';
 import 'blocs/all_category/all_category_bloc.dart';
 import 'blocs/all_product/all_product_bloc.dart';
 import 'blocs/details_product/details_product_bloc.dart';
