@@ -18,7 +18,10 @@ class NoProductWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(
             height: 10,
@@ -39,7 +42,7 @@ class NoProductWidget extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
                 borderRadius: BorderRadius.circular(30),

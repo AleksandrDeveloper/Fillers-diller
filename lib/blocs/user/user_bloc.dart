@@ -10,19 +10,19 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
+  final _client = ApiClient();
   UserBloc() : super(UserLoading()) {
     on<AddUser>((event, emit) async {
       emit(UserLoading());
       try {
         Navigator.of(event.context).pushNamed('home_screen/user_screen');
-        final client = ApiClient();
-        print(Text('hello'));
+
         var userIdBox = await Hive.openBox<int>('userIdBox');
         final userId = userIdBox.get('userIdKey') as int;
-
-        userIdBox.close();
-        final jsonUser = await client.searchUser(userId);
         print('Это id из бокса $userId');
+        await userIdBox.close();
+        final jsonUser = await _client.searchUser(userId: userId);
+
         print(jsonUser.firstName);
 
         emit(UserLoaded(user: jsonUser));

@@ -15,6 +15,7 @@ class UserScreen extends StatelessWidget {
         return const Scaffold(
           appBar: AppBarWidget(
             title: 'Профиль',
+            widget: SizedBox.shrink(),
           ),
           body: Center(
             child: CircularProgressIndicator(color: Colors.red),
@@ -25,6 +26,7 @@ class UserScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBarWidget(
             title: ' ${state.user.firstName} ${state.user.lastName} ',
+            widget: SizedBox.shrink(),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -44,6 +46,7 @@ class UserScreen extends StatelessWidget {
         return Scaffold(
           appBar: const AppBarWidget(
             title: 'Профиль',
+            widget: SizedBox.shrink(),
           ),
           body: Center(
             child: Text(state.errorMessag),

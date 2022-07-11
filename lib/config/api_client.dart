@@ -10,7 +10,7 @@ class ApiClient {
   final _consumerKey = 'ck_2ab5c89962ef98cc8c241b67e9c29cac9d6d1fe2';
   final _consumerSecret = 'cs_c7f75335487d5b6c2d9e53a388781e8bcc725b37';
 
-  Future<User> searchUser(int userId) async {
+  Future<User> searchUser({required int userId}) async {
     final url =
         '$_baseUrl/wp-json/wc/v3/customers/$userId?consumer_key=$_consumerKey&consumer_secret=$_consumerSecret';
     final response = await client.get(Uri.parse(url));
@@ -81,7 +81,7 @@ class ApiClient {
       headers: head,
       body: jsonEncode(body),
     );
-    if (request.statusCode == 200) {
+    if (request.statusCode == 201) {
       print('получилось');
       return true;
     } else {

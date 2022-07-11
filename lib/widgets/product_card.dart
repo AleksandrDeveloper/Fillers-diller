@@ -23,52 +23,49 @@ class ProductCardWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Stack(
             children: [
-              ZoomIn(
-                duration: const Duration(seconds: 2),
-                child: Container(
-                  width: 150,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Colors.black, Colors.black54],
-                    ),
-                    borderRadius: BorderRadius.circular(20),
+              Container(
+                width: 150,
+                height: 200,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Colors.black, Colors.black54],
                   ),
-                  child: Align(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Text(
-                                product.name,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Align(
+                    alignment: AlignmentDirectional.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Text(
+                              product.name,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                product.regularPrice,
                                 maxLines: 1,
                                 style: const TextStyle(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w300,
                                     color: Colors.white),
                               ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  '${product.regularPrice}',
-                                  maxLines: 1,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )),
-                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )),
               ),
               Container(
                 width: 150,

@@ -24,10 +24,13 @@ class SearchAppBar extends StatelessWidget {
               color: Colors.white,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 5.0,
+              ),
               child: TextField(
                 decoration: const InputDecoration(
-                  hintText: 'Поиск',
+                  hintText: 'Введите название товара',
                   hintStyle: TextStyle(fontSize: 14),
                   border: InputBorder.none,
                 ),
@@ -48,7 +51,7 @@ class SearchAppBar extends StatelessWidget {
               icon: const Icon(
                 Icons.search,
                 size: 30,
-                color: Colors.black,
+                color: Color(0xffffffff),
               ),
             ),
           )
