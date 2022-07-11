@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:testfff/main.dart';
 
-import '../app_images.dart';
+import '../config/app_images.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final Widget widget;
+  final Widget iconLeft;
   const AppBarWidget({
     Key? key,
     required this.title,
+    required this.iconLeft,
     required this.widget,
   }) : super(key: key);
 
@@ -29,19 +30,12 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 70.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Color(0xffffffff),
-                  ),
-                ),
+                iconLeft,
                 Text(
                   title,
                   style: const TextStyle(
@@ -50,10 +44,13 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                        'home_screen/product_screen/wishlist_screen');
+                  },
                   icon: const Icon(
-                    Icons.arrow_back,
-                    color: Color(0xffffffff),
+                    Icons.favorite,
+                    color: Colors.red,
                   ),
                 ),
               ],

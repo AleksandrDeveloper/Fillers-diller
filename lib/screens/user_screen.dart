@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../blocs/user/user_bloc.dart';
-import '../widgets/app_bar_widget.dart';
-import '../widgets/title_widget.dart';
+import '../widgets/widgets.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -12,21 +10,40 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
       if (state is UserLoading) {
-        return const Scaffold(
+        return Scaffold(
           appBar: AppBarWidget(
             title: 'Профиль',
-            widget: SizedBox.shrink(),
+            widget: const SizedBox.shrink(),
+            iconLeft: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Color(0xffffffff),
+              ),
+            ),
           ),
-          body: Center(
+          body: const Center(
             child: CircularProgressIndicator(color: Colors.red),
           ),
+          bottomNavigationBar: BottomBarWidget(),
         );
       }
       if (state is UserLoaded) {
         return Scaffold(
           appBar: AppBarWidget(
-            title: ' ${state.user.firstName} ${state.user.lastName} ',
-            widget: SizedBox.shrink(),
+            title: 'Профиль',
+            widget: const SizedBox.shrink(),
+            iconLeft: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Color(0xffffffff),
+              ),
+            ),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -40,17 +57,28 @@ class UserScreen extends StatelessWidget {
               ],
             ),
           ),
+          bottomNavigationBar: BottomBarWidget(),
         );
       }
       if (state is UserError) {
         return Scaffold(
-          appBar: const AppBarWidget(
+          appBar: AppBarWidget(
             title: 'Профиль',
-            widget: SizedBox.shrink(),
+            widget: const SizedBox.shrink(),
+            iconLeft: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Color(0xffffffff),
+              ),
+            ),
           ),
           body: Center(
             child: Text(state.errorMessag),
           ),
+          bottomNavigationBar: BottomBarWidget(),
         );
       }
       return Container();

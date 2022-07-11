@@ -38,7 +38,7 @@ class ApiClient {
     required String phone,
     required int userId,
   }) async {
-    final url =
+    const url =
         'https://fillers-diller.ru/wp-json/wc/v3/orders/?consumer_key=ck_2ab5c89962ef98cc8c241b67e9c29cac9d6d1fe2&consumer_secret=cs_c7f75335487d5b6c2d9e53a388781e8bcc725b37&';
     var body = {
       "payment_method": "bacs",

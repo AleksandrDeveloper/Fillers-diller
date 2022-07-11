@@ -5,8 +5,8 @@ import '../modal/category_modal.dart';
 
 class CategoryCardWidget extends StatelessWidget {
   final int index;
-  CategoryProduct category;
-  CategoryCardWidget({
+  final CategoryProduct category;
+  const CategoryCardWidget({
     Key? key,
     required this.category,
     required this.index,

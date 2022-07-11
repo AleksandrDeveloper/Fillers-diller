@@ -105,7 +105,7 @@ class OrderWidget extends StatelessWidget {
               const SizedBox(
                 height: 90,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   final firstName = firstNameController.text;
                   final lastName = lastNameController.text;
@@ -115,16 +115,19 @@ class OrderWidget extends StatelessWidget {
                   final city = cityController.text;
                   final adres = adresController.text;
 
-                  BlocProvider.of<OrderBloc>(context).add(CreateOrder(
-                      adres: adres,
-                      firstName: firstName,
-                      lastName: lastName,
-                      email: email,
-                      phone: phone,
-                      country: country,
-                      city: city,
-                      postCode: '140033',
-                      cardProduct: cardProduct));
+                  BlocProvider.of<OrderBloc>(context).add(
+                    CreateOrder(
+                        adres: adres,
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        phone: phone,
+                        country: country,
+                        city: city,
+                        postCode: '140033',
+                        cardProduct: cardProduct),
+                  );
+                  Navigator.of(context).pushNamed('order/thank_screen');
                 },
                 child: const Buttom(
                   title: 'Отправить заказ',

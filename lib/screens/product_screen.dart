@@ -5,7 +5,7 @@ import '../blocs/product_card/product_card_bloc.dart';
 import '../blocs/wishlist/wishlist_bloc.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen();
+  const ProductScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class ProductScreenWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '${state.detailsProducts.regularPrice}',
+                            state.detailsProducts.regularPrice,
                             style: const TextStyle(
                                 decorationColor: Colors.red,
                                 decoration: TextDecoration.lineThrough,
@@ -159,7 +159,7 @@ class ProductScreenWidget extends StatelessWidget {
                             width: 6,
                           ),
                           Text(
-                            '${state.detailsProducts.regularPrice}',
+                            state.detailsProducts.regularPrice,
                             style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w500,

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:testfff/api_client/api_client.dart';
+import 'package:testfff/config/api_client.dart';
 
 import '../../modal/product_modal.dart';
 

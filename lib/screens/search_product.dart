@@ -14,9 +14,18 @@ class SearchProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(
+      appBar: AppBarWidget(
         title: 'Поиск',
-        widget: SearchAppBar(),
+        widget: const SearchAppBar(),
+        iconLeft: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop;
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Color(0xffffffff),
+          ),
+        ),
       ),
       body: const SearchProductWidget(),
       bottomNavigationBar: BottomBarWidget(),
@@ -32,8 +41,13 @@ class SearchProductWidget extends StatelessWidget {
     return BlocBuilder<SearchProductBloc, SearchProductState>(
       builder: (context, state) {
         if (state is SearchProductLoading) {
-          return const NoProductWidget(
-            title: 'Список пуст',
+          return const Center(
+            child: NoProductWidget(
+              title: 'Список пуст',
+              bottomTrue: false,
+              subTitle:
+                  'Веедите в поисковую строку название интересующего товара',
+            ),
           );
         }
         if (state is SearchProductLoaded) {

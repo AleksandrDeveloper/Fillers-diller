@@ -8,17 +8,17 @@ abstract class OrderEvent extends Equatable {
 }
 
 class CreateOrder extends OrderEvent {
-  String firstName;
-  String lastName;
-  List<Product> cardProduct;
-  String adres;
-  String city;
-  String postCode;
-  String country;
-  String email;
-  String phone;
+  final String firstName;
+  final String lastName;
+  final List<Product> cardProduct;
+  final String adres;
+  final String city;
+  final String postCode;
+  final String country;
+  final String email;
+  final String phone;
 
-  CreateOrder({
+  const CreateOrder({
     required this.firstName,
     required this.lastName,
     required this.cardProduct,

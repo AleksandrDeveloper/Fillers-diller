@@ -8,11 +8,11 @@ abstract class AuthEvent extends Equatable {
 }
 
 class TryAuth extends AuthEvent {
-  BuildContext context;
-  String login;
-  String pasword;
+  final BuildContext context;
+  final String login;
+  final String pasword;
 
-  TryAuth({
+  const TryAuth({
     required this.login,
     required this.pasword,
     required this.context,

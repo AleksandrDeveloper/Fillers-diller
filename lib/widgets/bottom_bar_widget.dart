@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/user/user_bloc.dart';
-import '../storage/is_autf_pref.dart';
 
 class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
   BottomBarWidget({
@@ -10,18 +9,18 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pref = IsAuthPrefProvider();
     return BottomAppBar(
       elevation: 0,
       color: Colors.transparent,
       child: Container(
         decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(topRight: Radius.circular(35.0)),
           gradient: LinearGradient(
             colors: [Colors.black, Colors.black87],
           ),
         ),
         width: 100,
-        height: 50,
+        height: 70,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

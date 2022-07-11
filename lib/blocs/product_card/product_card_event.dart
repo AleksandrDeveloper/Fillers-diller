@@ -28,15 +28,15 @@ class DeleteProductToCard extends ProductCardEvent {
 }
 
 class PudQuntity extends ProductCardEvent {
-  Product product;
-  PudQuntity({required this.product});
+  final Product product;
+  const PudQuntity({required this.product});
   @override
   List<Object> get props => [product];
 }
 
 class RemuveQuntity extends ProductCardEvent {
-  Product product;
-  RemuveQuntity({required this.product});
+  final Product product;
+  const RemuveQuntity({required this.product});
   @override
   List<Object> get props => [product];
 }

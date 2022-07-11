@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../app_images.dart';
+import '../config/app_images.dart';
 import '../blocs/auth/auth_bloc.dart';
 import '../modal/test_modal.dart';
 

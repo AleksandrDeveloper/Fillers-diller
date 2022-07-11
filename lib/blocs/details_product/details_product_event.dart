@@ -9,8 +9,8 @@ abstract class DetailsProductEvent extends Equatable {
 
 class GetDetailProduct extends DetailsProductEvent {
   final int productId;
-  BuildContext context;
-  GetDetailProduct({required this.productId, required this.context});
+  final BuildContext context;
+  const GetDetailProduct({required this.productId, required this.context});
 
   @override
   List<Object> get props => [productId, context];

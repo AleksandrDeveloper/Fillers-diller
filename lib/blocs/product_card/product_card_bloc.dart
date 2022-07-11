@@ -8,10 +8,8 @@ part 'product_card_state.dart';
 class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
   ProductCardBloc() : super(ProductCardLoading()) {
     List<Product> listProducts = [];
-    List<Product> uniquelist = [];
+
     int tottalPrises = 0;
-    var newList;
-    Product product;
 
     on<AddProductToCard>(
       (event, emit) {
@@ -19,14 +17,7 @@ class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
         try {
           listProducts.add(event.product);
           int prise = int.parse(event.product.regularPrice);
-
           tottalPrises = tottalPrises += prise;
-          // tottalPrises = listProducts.fold(
-          //     tottalPrises,
-          //     (previousValue, element) =>
-          //         previousValue + element.regularPriceInt);
-          print(tottalPrises);
-          print(listProducts.length);
           emit(ProductCardLoaded(
             productCard: ProductCard(products: listProducts),
             newQuntity: tottalPrises,
@@ -64,7 +55,6 @@ class ProductCardBloc extends Bloc<ProductCardEvent, ProductCardState> {
         emit(ProductCardLoaded(
             productCard: ProductCard(products: listProducts),
             newQuntity: tottalPrises));
-        print(tottalPrises);
       } catch (e) {}
     });
 

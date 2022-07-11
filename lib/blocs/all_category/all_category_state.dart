@@ -13,17 +13,17 @@ class AllCategoryLoading extends AllCategoryState {
 }
 
 class AllCategoryLoaded extends AllCategoryState {
-  List<CategoryProduct> category = [];
+  final List<CategoryProduct> category;
 
-  AllCategoryLoaded({required this.category});
+  const AllCategoryLoaded({required this.category});
 
   @override
   List<Object> get props => [category];
 }
 
 class AllCategoryError extends AllCategoryState {
-  String errorMassage;
-  AllCategoryError({required this.errorMassage});
+  final String errorMassage;
+  const AllCategoryError({required this.errorMassage});
   @override
   List<Object> get props => [errorMassage];
 }

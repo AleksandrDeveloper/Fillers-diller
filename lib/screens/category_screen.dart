@@ -6,7 +6,7 @@ import '../blocs/product_card/product_card_bloc.dart';
 import '../blocs/wishlist/wishlist_bloc.dart';
 import '../widgets/bottom_bar_widget.dart';
 import '../widgets/product_card_max.dart';
-import '../widgets/sliver_app_bar.dart';
+import '../widgets/widgets.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({
@@ -15,17 +15,32 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBer(
-      widget: buildScreen(),
-      title: const Text('Каталог'),
-      NavBar: BottomBarWidget(),
+    return BlocBuilder<CategoryProductBloc, CategoryProductState>(
+      builder: (context, state) {
+        if (state is CategoryProductLoaded) {
+          return Scaffold(
+            appBar: AppBarWidget(
+              title: 'Профиль',
+              widget: const SizedBox.shrink(),
+              iconLeft: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('home_screen/card_screen');
+                },
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  color: Color(0xffffffff),
+                ),
+              ),
+            ),
+            body: const CategoryScreenWidget(),
+            bottomNavigationBar: BottomBarWidget(),
+          );
+        }
+        return Container();
+      },
     );
   }
 }
-
-Widget buildScreen() => const SliverToBoxAdapter(
-      child: CategoryScreenWidget(),
-    );
 
 class CategoryScreenWidget extends StatelessWidget {
   const CategoryScreenWidget({Key? key}) : super(key: key);

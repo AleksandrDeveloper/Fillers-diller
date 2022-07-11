@@ -13,19 +13,24 @@ class AllProductLoading extends AllProductState {
 }
 
 class AllProductLoaded extends AllProductState {
-  List<Product> productFeatured = [];
-  List<Product> productOnSale = [];
+  final List<Product> productFeatured;
+  final List<Product> productOnSale;
 
-  AllProductLoaded(
-      {required this.productFeatured, required this.productOnSale});
+  const AllProductLoaded({
+    required this.productFeatured,
+    required this.productOnSale,
+  });
 
   @override
-  List<Object> get props => [productFeatured, productOnSale];
+  List<Object> get props => [
+        productFeatured,
+        productOnSale,
+      ];
 }
 
 class AllProductError extends AllProductState {
-  String errorMassage;
-  AllProductError({required this.errorMassage});
+  final String errorMassage;
+  const AllProductError({required this.errorMassage});
 
   @override
   List<Object> get props => [errorMassage];

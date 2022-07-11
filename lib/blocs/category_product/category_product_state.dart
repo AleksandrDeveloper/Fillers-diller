@@ -13,15 +13,15 @@ class CategoryProductLoading extends CategoryProductState {
 }
 
 class CategoryProductLoaded extends CategoryProductState {
-  List<Product> categoryProduct = [];
-  CategoryProductLoaded({required this.categoryProduct});
+  final List<Product> categoryProduct;
+  const CategoryProductLoaded({required this.categoryProduct});
   @override
   List<Object> get props => [categoryProduct];
 }
 
 class CategoryProductError extends CategoryProductState {
-  String errorMassage;
-  CategoryProductError({required this.errorMassage});
+  final String errorMassage;
+  const CategoryProductError({required this.errorMassage});
   @override
   List<Object> get props => [errorMassage];
 }

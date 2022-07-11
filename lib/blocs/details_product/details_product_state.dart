@@ -13,16 +13,16 @@ class DetailsProductLoading extends DetailsProductState {
 }
 
 class DetailsProductLoaded extends DetailsProductState {
-  Product detailsProducts;
-  DetailsProductLoaded({required this.detailsProducts});
+  final Product detailsProducts;
+  const DetailsProductLoaded({required this.detailsProducts});
 
   @override
   List<Object> get props => [detailsProducts];
 }
 
 class DetailsProductError extends DetailsProductState {
-  String errrorMasage;
-  DetailsProductError({required this.errrorMasage});
+  final String errrorMasage;
+  const DetailsProductError({required this.errrorMasage});
   @override
   List<Object> get props => [errrorMasage];
 }
