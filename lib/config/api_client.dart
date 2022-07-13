@@ -20,9 +20,7 @@ class ApiClient {
     if (response.statusCode == 200) {
       final requestJson =
           await jsonDecode(response.body) as Map<String, dynamic>;
-      print(requestJson['email']);
       final userJson = User.fromJson(requestJson);
-      print(userJson.username);
       return userJson;
     } else {
       throw Error();
@@ -94,6 +92,7 @@ class ApiClient {
   Future<bool> createCustomer({
     required String email,
     required String password,
+    required String name,
   }) async {
     WooCommerceAPI wooCommerceAPI = WooCommerceAPI(
         url: "https://fillers-diller.ru",
@@ -106,7 +105,7 @@ class ApiClient {
           "email": email,
           "password": password,
           "billing": {
-            "first_name": "flutter",
+            "first_name": name,
           }
         },
       );

@@ -15,7 +15,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<AddUser>((event, emit) async {
       emit(UserLoading());
       try {
-        Navigator.of(event.context).pushNamed('home_screen/user_screen');
         final userIdBox = await Hive.openBox<int>('userIdBox');
         final userId = userIdBox.get('userIdKey') as int;
         await userIdBox.close();

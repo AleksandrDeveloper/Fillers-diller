@@ -128,12 +128,24 @@ class AuthScreenWidget extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('auth/registration');
-                    },
-                    child: const Text('Зарегистрироваться',
-                        style: TextStyle(color: Colors.red)))
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Еще нет аккаунта?',
+                        style: TextStyle(
+                          color: Colors.white,
+                        )),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('auth/registration');
+                      },
+                      child: const Text(
+                        'Зарегистрироваться',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

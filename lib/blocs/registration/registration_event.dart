@@ -12,9 +12,11 @@ class TryRegistration extends RegistrationEvent {
   final String email;
   final String passwordOne;
   final String passwordTwo;
+  final String name;
   const TryRegistration({
     required this.context,
     required this.email,
+    required this.name,
     required this.passwordOne,
     required this.passwordTwo,
   });
@@ -25,5 +27,6 @@ class TryRegistration extends RegistrationEvent {
         email,
         passwordOne,
         passwordTwo,
+        name,
       ];
 }
