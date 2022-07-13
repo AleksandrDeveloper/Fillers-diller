@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../config/app_images.dart';
 import '../blocs/auth/auth_bloc.dart';
+import '../widgets/widgets.dart';
 
 class AuthScreenWidget extends StatelessWidget {
   const AuthScreenWidget({
@@ -41,66 +42,35 @@ class AuthScreenWidget extends StatelessWidget {
                 const Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Войти',
+                    'Вход',
                     style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                         color: Colors.white),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 50,
-                  width: 500,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.grey.shade200),
-                  child: Center(
-                    child: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        hintText: 'Логин',
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.mail,
-                          color: Colors.black,
-                        ),
-                      ),
-                      controller: loginController,
-                    ),
+                TextFieldAuthWidget(
+                  controller: loginController,
+                  hintText: 'Логин',
+                  obscureText: false,
+                  icon: const Icon(
+                    Icons.mail,
+                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  height: 50,
-                  width: 500,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.grey.shade200),
-                  child: Center(
-                    child: TextField(
-                      obscureText: true,
-                      keyboardType: TextInputType.multiline,
-                      decoration: const InputDecoration(
-                        hintText: 'Пароль',
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.key,
-                          color: Colors.black,
-                        ),
-                      ),
-                      controller: paswordController,
-                    ),
+                TextFieldAuthWidget(
+                  controller: paswordController,
+                  hintText: 'Пароль',
+                  obscureText: true,
+                  icon: const Icon(
+                    Icons.key,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
-                InkWell(
+                GestureDetector(
                   onTap: () {
                     final String login = loginController.text;
                     final String pasword = paswordController.text;

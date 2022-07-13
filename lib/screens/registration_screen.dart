@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/registration/registration_bloc.dart';
 import '../config/app_images.dart';
+import '../widgets/widgets.dart';
 
 class RegistrationScreenWidget extends StatelessWidget {
   const RegistrationScreenWidget({
@@ -55,170 +56,16 @@ class RegistrationScreenWidget extends StatelessWidget {
                             color: Colors.white),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    BlocBuilder<RegistrationBloc, RegistrationState>(
-                      builder: (context, state) {
-                        if (state is RegistrationError) {
-                          return Text(
-                            state.errorName,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(
-                                  color: const Color.fromARGB(255, 212, 12, 12),
-                                ),
-                          );
-                        }
-                        return Container();
-                      },
-                    ),
-                    Container(
-                      height: 50,
-                      width: 500,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey.shade200),
-                      child: Center(
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            hintText: 'Ваше имя',
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: Colors.black,
-                            ),
-                          ),
-                          controller: emailController,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    BlocBuilder<RegistrationBloc, RegistrationState>(
-                      builder: (context, state) {
-                        if (state is RegistrationError) {
-                          return Text(
-                            state.errorEmail,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(
-                                  color: const Color.fromARGB(255, 212, 12, 12),
-                                ),
-                          );
-                        }
-                        return Container();
-                      },
-                    ),
-                    Container(
-                      height: 50,
-                      width: 500,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey.shade200),
-                      child: Center(
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            hintText: 'Email',
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.mail,
-                              color: Colors.black,
-                            ),
-                          ),
-                          controller: emailController,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    BlocBuilder<RegistrationBloc, RegistrationState>(
-                      builder: (context, state) {
-                        if (state is RegistrationError) {
-                          return Text(
-                            state.errorPasswordOne,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(
-                                  color: const Color.fromARGB(255, 212, 12, 12),
-                                ),
-                          );
-                        }
-                        return Container();
-                      },
-                    ),
-                    Container(
-                      height: 50,
-                      width: 500,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey.shade200),
-                      child: Center(
-                        child: TextField(
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            hintText: 'Пароль',
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.key,
-                              color: Colors.black,
-                            ),
-                          ),
-                          controller: passwordOneController,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    BlocBuilder<RegistrationBloc, RegistrationState>(
-                      builder: (context, state) {
-                        if (state is RegistrationError) {
-                          return Text(
-                            state.errorPasswordTwo,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(
-                                  color: const Color.fromARGB(255, 212, 12, 12),
-                                ),
-                          );
-                        }
-                        return Container();
-                      },
-                    ),
-                    Container(
-                      height: 50,
-                      width: 500,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.grey.shade200),
-                      child: Center(
-                        child: TextField(
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            hintText: 'Повторите пароль',
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.key,
-                              color: Colors.black,
-                            ),
-                          ),
-                          controller: passwordTwoController,
-                        ),
-                      ),
+                    FormWidget(
+                      emailController: emailController,
+                      nameController: nameController,
+                      passwordOneController: passwordOneController,
+                      passwordTwoController: passwordTwoController,
                     ),
                     const SizedBox(
                       height: 40,
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         final String email = emailController.text;
                         final String passwordOne = passwordOneController.text;
@@ -275,6 +122,68 @@ class RegistrationScreenWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class FormWidget extends StatelessWidget {
+  final TextEditingController nameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordOneController;
+  final TextEditingController passwordTwoController;
+  const FormWidget({
+    Key? key,
+    required this.nameController,
+    required this.emailController,
+    required this.passwordOneController,
+    required this.passwordTwoController,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextFieldRegistWidget(
+          controller: nameController,
+          hintText: 'Ваше имя',
+          obscureText: false,
+          errorText: 'name',
+          icon: const Icon(
+            Icons.person,
+            color: Colors.black,
+          ),
+        ),
+        TextFieldRegistWidget(
+          controller: emailController,
+          hintText: 'Email',
+          obscureText: false,
+          errorText: 'email',
+          icon: const Icon(
+            Icons.mail,
+            color: Colors.black,
+          ),
+        ),
+        TextFieldRegistWidget(
+          controller: passwordOneController,
+          hintText: 'Пароль',
+          obscureText: true,
+          errorText: 'passwordOne',
+          icon: const Icon(
+            Icons.key,
+            color: Colors.black,
+          ),
+        ),
+        TextFieldRegistWidget(
+          controller: passwordTwoController,
+          hintText: 'Повторите пароль',
+          obscureText: true,
+          errorText: 'passwordTwo',
+          icon: const Icon(
+            Icons.key,
+            color: Colors.black,
+          ),
+        ),
+      ],
     );
   }
 }
