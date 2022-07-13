@@ -5,3 +5,4 @@ export 'category_cartd.dart';
 export 'no_product.dart';
 export 'text_field_autf.dart';
 export 'text_field_regist.dart';
+export 'form_regist_widget.dart';

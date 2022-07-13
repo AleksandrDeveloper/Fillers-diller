@@ -43,5 +43,5 @@ class AppRoutes {
       return const WishlistScreen();
     }),
   };
-  final String initialRoutes = 'auth';
+  final String initialRoutes = 'splash';
 }
