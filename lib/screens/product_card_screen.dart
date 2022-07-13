@@ -118,8 +118,6 @@ class ProductCardWidget extends StatelessWidget {
                                                   product: state.productCard
                                                       .products[index],
                                                 ));
-                                                print(
-                                                    'это curent quntity ${state.productCard.products[index].quntity}');
                                               },
                                               icon: const Icon(Icons.remove)),
                                           Text(
@@ -136,8 +134,6 @@ class ProductCardWidget extends StatelessWidget {
                                                   product: state.productCard
                                                       .products[index],
                                                 ));
-                                                print(
-                                                    'это curent quntity ${state.productCard.products[index].quntity}');
                                               },
                                               icon: const Icon(Icons.add)),
                                         ],

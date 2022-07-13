@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
+
+import '../modal/category_modal.dart';
 import '../modal/modals.dart';
 import '../modal/order_product.dart';
+import '../modal/user_modal.dart';
 
 class ApiClient {
   final client = http.Client();
@@ -83,10 +86,8 @@ class ApiClient {
       body: jsonEncode(body),
     );
     if (request.statusCode == 201) {
-      print('получилось');
       return true;
     } else {
-      print('не получилось');
       return false;
     }
   }
@@ -137,13 +138,13 @@ class ApiClient {
     if (response.statusCode == 200) {
       final boxProduct = await Hive.openBox<String>('boxProduct');
       await boxProduct.clear();
-      boxProduct.put('jsonProduct', response.body);
+      await boxProduct.put('jsonProduct', response.body);
       await boxProduct.close();
-      final reqestJson = jsonDecode(response.body) as List;
-
-      List<Product> productJson =
+      final reqestJson = await jsonDecode(response.body) as List;
+      print(reqestJson.first['name']);
+      final productJson =
           reqestJson.map((json) => Product.fromJson(json)).toList();
-
+      print('name product = ${productJson.first.name}');
       return productJson;
     } else {
       throw UnimplementedError('error');
@@ -210,9 +211,8 @@ class ApiClient {
 
     if (response.statusCode == 200) {
       final categoryReqest = await jsonDecode(response.body) as List;
-      List<CategoryProduct> categoryJson = categoryReqest
-          .map((json) => CategoryProduct.fromJson(json as Map<String, dynamic>))
-          .toList();
+      final categoryJson =
+          categoryReqest.map((json) => CategoryProduct.fromJson(json)).toList();
 
       return categoryJson;
     } else {

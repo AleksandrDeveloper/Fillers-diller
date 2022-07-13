@@ -13,7 +13,6 @@ class User {
   final Ing shipping;
   final bool isPayingCustomer;
   final String avatarUrl;
-  final List<MetaDatum> metaData;
   final Links links;
 
   const User({
@@ -31,7 +30,6 @@ class User {
     required this.shipping,
     required this.isPayingCustomer,
     required this.avatarUrl,
-    required this.metaData,
     required this.links,
   });
 
@@ -50,8 +48,6 @@ class User {
         shipping: Ing.fromJson(json["shipping"]),
         isPayingCustomer: json["is_paying_customer"],
         avatarUrl: json["avatar_url"],
-        metaData: List<MetaDatum>.from(
-            json["meta_data"].map((x) => MetaDatum.fromJson(x))),
         links: Links.fromJson(json["_links"]),
       );
 
@@ -70,7 +66,6 @@ class User {
         "shipping": shipping.toJson(),
         "is_paying_customer": isPayingCustomer,
         "avatar_url": avatarUrl,
-        "meta_data": List<dynamic>.from(metaData.map((x) => x.toJson())),
         "_links": links.toJson(),
       };
 }
@@ -166,30 +161,6 @@ class Collection {
 
   Map<String, dynamic> toJson() => {
         "href": href,
-      };
-}
-
-class MetaDatum {
-  const MetaDatum({
-    required this.id,
-    required this.key,
-    required this.value,
-  });
-
-  final int id;
-  final String key;
-  final dynamic value;
-
-  factory MetaDatum.fromJson(Map<String, dynamic> json) => MetaDatum(
-        id: json["id"],
-        key: json["key"],
-        value: json["value"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "key": key,
-        "value": value,
       };
 }
 

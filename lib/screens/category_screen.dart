@@ -18,14 +18,14 @@ class CategoryScreen extends StatelessWidget {
         if (state is CategoryProductLoaded) {
           return Scaffold(
             appBar: AppBarWidget(
-              title: 'Профиль',
+              title: state.categoryProduct.first.categories.first.name,
               widget: const SizedBox.shrink(),
               iconLeft: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('home_screen/card_screen');
+                  Navigator.of(context).pop();
                 },
                 icon: const Icon(
-                  Icons.shopping_cart,
+                  Icons.arrow_back,
                   color: Color(0xffffffff),
                 ),
               ),
