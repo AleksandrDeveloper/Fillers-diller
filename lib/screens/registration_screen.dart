@@ -2,18 +2,20 @@ import 'dart:ui';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/registration/registration_bloc.dart';
 import '../config/app_images.dart';
 import '../blocs/auth/auth_bloc.dart';
 
-class AuthScreenWidget extends StatelessWidget {
-  const AuthScreenWidget({
+class RegistrationScreenWidget extends StatelessWidget {
+  const RegistrationScreenWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final loginController = TextEditingController();
-    final paswordController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordOneController = TextEditingController();
+    final passwordTwoController = TextEditingController();
 
     return Scaffold(
       body: Container(
@@ -41,7 +43,7 @@ class AuthScreenWidget extends StatelessWidget {
                 const Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Войти',
+                    'Регистрация',
                     style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
@@ -50,6 +52,19 @@ class AuthScreenWidget extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 20,
+                ),
+                BlocBuilder<RegistrationBloc, RegistrationState>(
+                  builder: (context, state) {
+                    if (state is RegistrationError) {
+                      return Text(
+                        state.errorEmail,
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                              color: const Color.fromARGB(255, 212, 12, 12),
+                            ),
+                      );
+                    }
+                    return Container();
+                  },
                 ),
                 Container(
                   height: 50,
@@ -61,19 +76,32 @@ class AuthScreenWidget extends StatelessWidget {
                     child: TextField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
-                        hintText: 'Логин',
+                        hintText: 'Email',
                         border: InputBorder.none,
                         prefixIcon: Icon(
                           Icons.mail,
                           color: Colors.black,
                         ),
                       ),
-                      controller: loginController,
+                      controller: emailController,
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 30,
+                ),
+                BlocBuilder<RegistrationBloc, RegistrationState>(
+                  builder: (context, state) {
+                    if (state is RegistrationError) {
+                      return Text(
+                        state.errorPasswordOne,
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                              color: const Color.fromARGB(255, 212, 12, 12),
+                            ),
+                      );
+                    }
+                    return Container();
+                  },
                 ),
                 Container(
                   height: 50,
@@ -84,7 +112,6 @@ class AuthScreenWidget extends StatelessWidget {
                   child: Center(
                     child: TextField(
                       obscureText: true,
-                      keyboardType: TextInputType.multiline,
                       decoration: const InputDecoration(
                         hintText: 'Пароль',
                         border: InputBorder.none,
@@ -93,7 +120,44 @@ class AuthScreenWidget extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      controller: paswordController,
+                      controller: passwordOneController,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                BlocBuilder<RegistrationBloc, RegistrationState>(
+                  builder: (context, state) {
+                    if (state is RegistrationError) {
+                      return Text(
+                        state.errorPasswordTwo,
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                              color: const Color.fromARGB(255, 212, 12, 12),
+                            ),
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                Container(
+                  height: 50,
+                  width: 500,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.grey.shade200),
+                  child: Center(
+                    child: TextField(
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: 'Повторите пароль',
+                        border: InputBorder.none,
+                        prefixIcon: Icon(
+                          Icons.key,
+                          color: Colors.black,
+                        ),
+                      ),
+                      controller: passwordTwoController,
                     ),
                   ),
                 ),
@@ -102,15 +166,16 @@ class AuthScreenWidget extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    final String login = loginController.text;
-                    final String pasword = paswordController.text;
-                    BlocProvider.of<AuthBloc>(context).add(
-                      TryAuth(
-                        login: login,
-                        pasword: pasword,
-                        context: context,
-                      ),
-                    );
+                    final String email = emailController.text;
+                    final String passwordOne = passwordOneController.text;
+                    final String passwordTwo = passwordTwoController.text;
+                    BlocProvider.of<RegistrationBloc>(context)
+                        .add(TryRegistration(
+                      context: context,
+                      email: email,
+                      passwordOne: passwordOne,
+                      passwordTwo: passwordTwo,
+                    ));
                   },
                   child: Container(
                     width: 250,
@@ -120,7 +185,7 @@ class AuthScreenWidget extends StatelessWidget {
                       color: const Color.fromRGBO(244, 244, 244, 1),
                     ),
                     child: const Center(
-                        child: Text('Войти',
+                        child: Text('Зарегистрироваться',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w500))),
                   ),
@@ -130,9 +195,9 @@ class AuthScreenWidget extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('auth/registration');
+                      Navigator.of(context).pushNamed('auth');
                     },
-                    child: const Text('Зарегистрироваться',
+                    child: const Text('Войти',
                         style: TextStyle(color: Colors.red)))
               ],
             ),

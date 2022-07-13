@@ -53,7 +53,7 @@ class UserScreen extends StatelessWidget {
                   title: 'Добро пожаловать ${state.user.firstName}',
                   color: Colors.black,
                 ),
-                Text(state.user.firstName),
+                Text(state.user.username),
               ],
             ),
           ),

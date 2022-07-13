@@ -16,13 +16,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserLoading());
       try {
         Navigator.of(event.context).pushNamed('home_screen/user_screen');
-        var userIdBox = await Hive.openBox<int>('userIdBox');
-        var userId = userIdBox.get('userIdKey') as int;
-        Navigator.of(event.context).pushNamed('home_screen/user_screen');
+        final userIdBox = await Hive.openBox<int>('userIdBox');
+        final userId = userIdBox.get('userIdKey') as int;
         await userIdBox.close();
 
         final jsonUser = await _client.searchUser(userId: userId);
-
+        Navigator.of(event.context).pushNamed('home_screen/user_screen');
         emit(UserLoaded(user: jsonUser));
       } catch (e) {
         emit(const UserError(errorMessag: 'Что то пошло не так'));

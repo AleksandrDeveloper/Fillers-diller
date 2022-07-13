@@ -46,6 +46,7 @@ dependencies:
   html: ^0.15.0
   internet_connection_checker: ^0.0.1+4
   cached_network_image: ^3.2.1
+  woocommerce_api: ^0.1.0
 
 dev_dependencies:
   flutter_test:

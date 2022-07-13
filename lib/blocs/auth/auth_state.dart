@@ -13,9 +13,16 @@ class AuthTrue extends AuthState {
 }
 
 class AuthError extends AuthState {
-  final String errorMassege;
-  const AuthError({required this.errorMassege});
+  final String errorEmail;
+  final String errorPassword;
+  const AuthError({
+    required this.errorEmail,
+    required this.errorPassword,
+  });
 
   @override
-  List<Object> get props => [errorMassege];
+  List<Object> get props => [
+        errorEmail,
+        errorPassword,
+      ];
 }

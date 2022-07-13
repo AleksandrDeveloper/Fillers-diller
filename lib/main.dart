@@ -8,6 +8,7 @@ import 'blocs/all_product/all_product_bloc.dart';
 import 'blocs/details_product/details_product_bloc.dart';
 import 'blocs/order/order_bloc.dart';
 import 'blocs/product_card/product_card_bloc.dart';
+import 'blocs/registration/registration_bloc.dart';
 import 'blocs/splashScreen/splashscreen_bloc.dart';
 import 'blocs/user/user_bloc.dart';
 import 'blocs/wishlist/wishlist_bloc.dart';
@@ -26,6 +27,7 @@ void main() async {
     BlocProvider<SplashscreenBloc>(create: (context) => SplashscreenBloc()),
     BlocProvider<ProductCardBloc>(create: (context) => ProductCardBloc()),
     BlocProvider<OrderBloc>(create: (context) => OrderBloc()),
+    BlocProvider<RegistrationBloc>(create: (context) => RegistrationBloc()),
     BlocProvider<CategoryProductBloc>(
         create: (context) => CategoryProductBloc()),
   ], child: const MyApp()));

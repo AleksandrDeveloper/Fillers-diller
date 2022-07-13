@@ -3,3 +3,4 @@ export 'auth_screen.dart';
 export 'splash_screen.dart';
 export 'thank_you_screen.dart';
 export 'all_product_screen.dart';
+export 'registration_screen.dart';

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:testfff/blocs/user/user_bloc.dart';
 
 class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
   BottomBarWidget({
@@ -61,16 +63,16 @@ class BottomBarWidget extends StatelessWidget with PreferredSizeWidget {
                 color: Colors.white,
               ),
             ),
-            // IconButton(
-            //   onPressed: () {
-            //     BlocProvider.of<UserBloc>(context)
-            //         .add(AddUser(context: context));
-            //   },
-            //   icon: const Icon(
-            //     Icons.person,
-            //     color: Colors.white,
-            //   ),
-            // ),
+            IconButton(
+              onPressed: () {
+                BlocProvider.of<UserBloc>(context)
+                    .add(AddUser(context: context));
+              },
+              icon: const Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            ),
           ],
         ),
       ),

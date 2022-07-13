@@ -61,9 +61,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
 
         emit(AuthTrue());
-      } catch (e) {
-        emit(const AuthError(errorMassege: 'Произошла ошибка'));
-      }
+      } catch (e) {}
     });
   }
 }

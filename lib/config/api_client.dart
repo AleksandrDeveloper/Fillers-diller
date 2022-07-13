@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:woocommerce_api/woocommerce_api.dart';
 import '../modal/category_modal.dart';
 import '../modal/modals.dart';
 import '../modal/order_product.dart';
@@ -17,13 +17,12 @@ class ApiClient {
     final url =
         '$_baseUrl/wp-json/wc/v3/customers/$userId?consumer_key=$_consumerKey&consumer_secret=$_consumerSecret';
     final response = await client.get(Uri.parse(url));
-    print(response.statusCode);
     if (response.statusCode == 200) {
       final requestJson =
           await jsonDecode(response.body) as Map<String, dynamic>;
-
+      print(requestJson['email']);
       final userJson = User.fromJson(requestJson);
-      print(userJson.firstName);
+      print(userJson.username);
       return userJson;
     } else {
       throw Error();
@@ -92,6 +91,32 @@ class ApiClient {
     }
   }
 
+  Future<bool> createCustomer({
+    required String email,
+    required String password,
+  }) async {
+    WooCommerceAPI wooCommerceAPI = WooCommerceAPI(
+        url: "https://fillers-diller.ru",
+        consumerKey: "ck_2ab5c89962ef98cc8c241b67e9c29cac9d6d1fe2",
+        consumerSecret: "cs_c7f75335487d5b6c2d9e53a388781e8bcc725b37");
+    try {
+      var response = await wooCommerceAPI.postAsync(
+        "customers",
+        {
+          "email": email,
+          "password": password,
+          "billing": {
+            "first_name": "flutter",
+          }
+        },
+      );
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<String> authUser({
     required String userName,
     required String userPasword,
@@ -141,10 +166,8 @@ class ApiClient {
       await boxProduct.put('jsonProduct', response.body);
       await boxProduct.close();
       final reqestJson = await jsonDecode(response.body) as List;
-      print(reqestJson.first['name']);
       final productJson =
           reqestJson.map((json) => Product.fromJson(json)).toList();
-      print('name product = ${productJson.first.name}');
       return productJson;
     } else {
       throw UnimplementedError('error');

@@ -17,7 +17,7 @@ class SplashscreenBloc extends Bloc<SplashscreenEvent, SplashscreenState> {
         var box = await Hive.openBox<bool>('isAuth');
         var isAuth = box.get('isAuthKey', defaultValue: false) as bool;
         final Widget widget =
-            isAuth == false ? const AuthWigget() : const HomeScreen();
+            isAuth == false ? const AuthScreenWidget() : const HomeScreen();
         box.close();
         bool result = await InternetConnectionChecker().hasConnection;
         if (result == true) {

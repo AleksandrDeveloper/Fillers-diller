@@ -12,7 +12,8 @@ import '../screens/wishlist_screen.dart';
 class AppRoutes {
   Map<String, Widget Function(BuildContext)> routes = {
     'splash': ((context) => const SplashScreenWidget()),
-    'auth': ((context) => const AuthWigget()),
+    'auth': ((context) => const AuthScreenWidget()),
+    'auth/registration': ((context) => const RegistrationScreenWidget()),
     'home_screen': (context) => const HomeScreen(),
     'home_screen/search_product': (context) {
       return const SearchProduct();
